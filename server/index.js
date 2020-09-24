@@ -7,16 +7,17 @@ const app = express();
 app.use('/', express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/stays/:stayId', (req, res) => {
-    var data = req.params.stayId; //string
+    var data = req.params.stayId;
     db.getRoomData(data, (err, results) => {
         if (err) {
             console.log(`Err @ [ app.get ] ::: ${err}`);
             res.status(400).send(err);
         } else {
-            console.log('Get Sucessfull');
+            console.log('Get Successful');
             res.status(200).send(results);
         }
     });
 });
+
 
 app.listen(port, () => console.log(`Listening @ http://localhost:${port}`));

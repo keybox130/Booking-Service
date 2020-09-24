@@ -28,6 +28,7 @@ const random = (min, max, floor) => {
         return num.toString();
     } else {
        var num =  min + (Math.random() * (max - min));
+       return num.toString();
     }
 }
 
