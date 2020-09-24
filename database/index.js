@@ -89,8 +89,8 @@ const generateSeedData = () => {
 }
 
 
-const seed = () => {
-    var arr = generateSeedData();
+const seed = (/*callback*/) => {
+    let arr = generateSeedData();
     Room.insertMany(arr, (err, docs) => {
         if (err) {
             console.log(`Error @ [ seed - Room.insertMany ] ::: ${err}`);
@@ -102,5 +102,19 @@ const seed = () => {
     });
 }
 
+const getRoomData = (data, callback) => {
+    var obj = { room_id: data };
+    Room.find(obj, (err, docs) => {
+        if (err) {
+            console.log(`Err @ [ getRoomData ] ::: ${err}`);
+            callback(err);
+        } else {
+            console.log('Fetch @ [ getRoomData ] Sucessfull');
+            callback(err, docs);
+        }
+    });
+}
 
+module.exports.getRoomData = getRoomData;
+//Run the script.
 // seed();
