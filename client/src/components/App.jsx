@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import InitialState from './InitialState.jsx';
 
 class App extends React.Component {
     constructor(props){
@@ -25,10 +26,10 @@ class App extends React.Component {
     }
 
     render() {
-        console.log(this.state.allRoomData);
         return (
             <div>
-                <h1>Hello World</h1>
+                <h1>Bookings</h1>
+                <InitialState data={this.state.allRoomData} />
             </div>
         )
     }
