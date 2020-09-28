@@ -1,0 +1,37 @@
+html, body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
+  font-family: inherit;
+  color: inherit;
+}
+
+.outer-div {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.spaced {
+  padding: 2px;
+}
+
+.secondary-text {
+  color: #575555;
+}
+
+.price-reviews-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}

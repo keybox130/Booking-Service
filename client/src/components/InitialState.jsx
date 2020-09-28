@@ -10,8 +10,7 @@ class InitialState extends React.Component {
   render() {
     let priceReview = this.props.room ? <PriceReview room={this.props.room[0]} /> : <h1>'Loading'...</h1>;
     return (
-      <div>
-        <h1>InitialState</h1>
+      <div className="outer-div">
         {priceReview}
       </div>
     );
