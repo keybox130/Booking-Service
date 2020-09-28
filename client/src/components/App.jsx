@@ -3,36 +3,42 @@ import axios from 'axios';
 import InitialState from './InitialState.jsx';
 
 class App extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {allRoomData: []};
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-        this.getRoomData = this.getRoomData.bind(this);
-    }
+    this.getRoom = this.getRoom.bind(this);
+  }
 
-    getRoomData() {
-        var self = this;
-        axios.get('http://localhost:3000/stays/2')
-            .then( res => {
-                self.setState({allRoomData: res.data}); 
-            })
-            .catch( err => {
-                console.log(`Err @ [ getRoomData ] ::: ${err}`);
-            })
-    }
+  getRoom() {
+    const self = this;
+    axios.get('http://localhost:3000/stays/2')
+      .then((res) => {
+        self.setState({ room: res.data });
+      })
+      .catch((err) => {
+        console.log(`Err @ [ getRoom ] ::: ${err}`);
+      });
+  }
 
-    componentDidMount() {
-        this.getRoomData();
-    }
+  componentDidMount() {
+    this.getRoom();
+  }
 
-    render() {
-        return (
-            <div>
-                <h1>Bookings</h1>
-                <InitialState data={this.state.allRoomData} />
-            </div>
-        )
+  render() {
+    let render;
+    if (this.state.room) {
+      render = <InitialState room={this.state.room} />;
+    } else {
+      render = <h1>Loading...</h1>;
     }
+    return (
+      <div>
+        <h1>Bookings</h1>
+        {render}
+      </div>
+    );
+  }
 }
 
 export default App;
