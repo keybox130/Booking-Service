@@ -1,10 +1,14 @@
 html, body {
   font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
   font-family: inherit;
   color: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 .outer-div {
@@ -29,9 +33,72 @@ div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
   color: #575555;
 }
 
+.bold-title {
+  font-weight: bold;
+}
+
 .price-reviews-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+}
+
+.guests-outer {
+  border: 0.5px solid #757575;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.guests-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  border-top: 0.5px solid #757575;
+}
+
+.guests-info {
+  padding: 7px;
+}
+
+.guests-arrow {
+  padding-right: 10px;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  padding: 5px;
+}
+
+.check-in-container, .check-out-container {
+  margin-right: 60px;
+}
+
+.check-out-container {
+  border-left: 0.5px solid #757575;
+  padding-left: 15px;
+}
+
+.btn-text {
+  color: whitesmoke;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  background-color: red;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+#app {
+  display: flex;
+  padding: 10px;
 }

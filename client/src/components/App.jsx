@@ -34,7 +34,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <h1>Bookings</h1>
+        <img src="https://keybox.s3-us-west-1.amazonaws.com/pepe.jpeg"/>
         {render}
       </div>
     );
