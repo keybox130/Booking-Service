@@ -5,6 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-top: 0.4px solid rgba(0, 0, 0, 0.12);
 `;
 
 const InfoContainer = styled.div`
