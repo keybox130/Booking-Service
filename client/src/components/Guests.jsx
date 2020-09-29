@@ -31,8 +31,8 @@ const ArrowContainer = styled.div`
   align-items: center;
 `;
 
-const Guests = ({ functions, guest }) => (
-  <Container>
+const Guests = ({ handleOpen, guest }) => (
+  <Container onClick={() => handleOpen()}>
     <InfoContainer>
       <SmallBoldTitle>GUESTS</SmallBoldTitle>
       <GuestText>{guest} guest</GuestText>

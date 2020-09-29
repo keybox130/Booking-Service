@@ -68,7 +68,7 @@ const DivRow = styled.div`
 
 const OpenedGuests = ({ functions, guest, count, maxGuests }) => (
   <div>
-  <Container>
+  <Container onClick={() => functions.handleOpen()}>
     <InfoContainer>
       <SmallBoldTitle>GUESTS</SmallBoldTitle>
       <GuestText>{guest} guest</GuestText>

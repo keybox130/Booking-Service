@@ -30,7 +30,8 @@ class CheckInOutGuest extends React.Component {
       children: 0,
       infants: 0,
       model: false,
-      maxGuests: this.props.room.max_guests
+      maxGuests: this.props.room.max_guests,
+      active: false
     };
 
     this.addAdult = this.addAdult.bind(this);
@@ -39,9 +40,18 @@ class CheckInOutGuest extends React.Component {
     this.removeChildren = this.removeChildren.bind(this);
     this.addInfants = this.addInfants.bind(this);
     this.removeInfants = this.removeInfants.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.setGuestCount = this.setGuestCount.bind(this);
+  }
+
+  setGuestCount() {
+    const {adults, children, infants} = this.state;
+    const num = adults + children + infants;
+    this.setState({guestCount: num});
   }
 
   openGuests() {
+    var self = this;
     this.setState({model: true});
   }
 
@@ -51,39 +61,54 @@ class CheckInOutGuest extends React.Component {
 
   addAdult() {
     const num = this.state.adults + 1;
-    this.setState({adults: num});
+    this.setState({adults: num},
+      () => this.setGuestCount());
   }
 
   removeAdult() {
     const num = this.state.adults - 1;
-    this.setState({adults: num});
+    this.setState({adults: num},
+      () => this.setGuestCount());
   }
 
   addChildren() {
     const num = this.state.children + 1;
-    this.setState({children: num});
+    this.setState({children: num},
+      () => this.setGuestCount());
   }
 
   removeChildren() {
     const num = this.state.children - 1;
-    this.setState({children: num});
+    this.setState({children: num},
+      () => this.setGuestCount());
   }
 
   addInfants() {
     const num = this.state.infants + 1;
-    this.setState({infants: num});
+    this.setState({infants: num},
+      () => this.setGuestCount());
   }
 
   removeInfants() {
     const num = this.state.infants - 1;
-    this.setState({infants: num});
+    this.setState({infants: num},
+      () => this.setGuestCount());
+  }
+
+  handleOpen() {
+    console.log('test');
+    if (this.state.active) {
+      this.setState({active: false});
+    } else if (!this.state.active) {
+      this.setState({active: true});
+    }
   }
 
   render() {
     console.log(this.props.max_guests);
-    const { guestCount, checkIn, checkOut } = this.state;
-    const guestsRender = guestCount ? <OpenedGuests maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants}} count={this.state}/> 
-      : <h1>Loading...</h1>;
+    const { guestCount, checkIn, checkOut, active } = this.state;
+    const guestsRender =  active === true ?  <OpenedGuests maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
+      : <Guests handleOpen={this.handleOpen} guest={guestCount}/>;
     const checkInRender = checkIn ? <CheckIn date={checkIn} /> 
       : <h1>Loading...</h1>;
     const checkOutRender = checkOut ? <CheckOut date={checkOut} />
