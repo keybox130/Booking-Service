@@ -15,7 +15,7 @@ const Container = styled.div`
 class InitialState extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dateSelected: false };
+    this.state = { dateSelected: false, calendar: false, guests: false};
   }
 
   render() {
