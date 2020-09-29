@@ -66,7 +66,31 @@ const DivRow = styled.div`
   justify-content: center;
 `;
 
-const OpenedGuests = ({ functions, guest, count, maxGuests }) => (
+const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
+  let adultsButtons;
+  if (guest < maxGuests) {
+    if (count.adults === 1 && guest < maxGuests) {
+      adultsButtons = (<DivRow>
+      <img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
+      <h3>{count.adults}</h3>
+      <img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+    </DivRow>);
+    } else if (count.adults >=2 && guest < maxGuests) {
+      adultsButtons = (<DivRow>
+        <img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+        <h3>{count.adults}</h3>
+        <img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow>);
+    }
+  } else {
+    adultsButtons = (<DivRow>
+      <img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+      <h3>{count.adults}</h3>
+      <img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/inactivePlus.png"/>
+    </DivRow>);
+  }
+
+  return (
   <div>
   <Container onClick={() => functions.handleOpen()}>
     <InfoContainer>
@@ -82,11 +106,7 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => (
       <DivCol>
         <h4>Adults</h4>
       </DivCol>
-      <DivRow>
-        <img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
-        <h3>{count.adults}</h3>
-        <img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
-      </DivRow>
+        {adultsButtons}
     </SelectorDiv>
     <SelectorDiv>
       <DivCol>
@@ -115,6 +135,11 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => (
     </SelectorDiv>
   </Holder>
   </div>
-);
-
+  );
+};
+{/* <DivRow>
+<img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
+<h3>{count.adults}</h3>
+<img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+</DivRow> */}
 export default OpenedGuests;
