@@ -6,13 +6,13 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   border-top: 0.4px solid rgba(0, 0, 0, 0.12);
+  padding: 10px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding: 10px;
 `;
 
 const SmallBoldTitle = styled.p`
@@ -29,7 +29,6 @@ const ArrowContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
 `;
 
 const Guests = ({ functions, guest }) => (

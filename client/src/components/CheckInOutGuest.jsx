@@ -22,7 +22,13 @@ const FlexRow = styled.div`
 class CheckInOutGuest extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checkIn: 'Add date', checkOut: 'Add date', guestCount: '1', adults: '1', children: '0', infants: '0'};
+    this.state = { checkIn: 'Add date',
+      checkOut: 'Add date',
+      guestCount: '1',
+      adults: '1',
+      children: '0',
+      infants: '0',
+    };
   }
 
   render() {

@@ -4,10 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 140px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
+  padding: 10px 140px 10px 10px;
   border-left: 0.4px solid rgba(0, 0, 0, 0.12);
 `;
 
