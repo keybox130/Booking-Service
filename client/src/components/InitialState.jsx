@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PriceReviews from './PriceReviews.jsx';
+import CheckInOutGuest from './CheckInOutGuest.jsx';
 
 const Container = styled.div`
   border: 1px solid rgb(221, 221, 221);
@@ -18,9 +19,12 @@ class InitialState extends React.Component {
   render() {
     let priceReviews = this.props.room ? <PriceReviews room={this.props.room[0]} />
       : <h1>Loading...</h1>;
+    let checkInOutGuest = this.props.room ? <CheckInOutGuest room={this.props.room[0]} />
+      : <h1>Loading...</h1>;
     return (
       <Container>
         {priceReviews}
+        {checkInOutGuest}
       </Container>
     );
   }
