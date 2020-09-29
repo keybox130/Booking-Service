@@ -101,4 +101,38 @@ div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
 #app {
   display: flex;
   padding: 10px;
+  flex-direction: column;
+}
+
+.price-disclaimer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.price-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-item, .price-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.price-total {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 0.5px solid #c7c7c7;
+}
+
+.price-amount, .price-item {
+  color: #757575;
+  font-weight: normal;
+}
+
+.price-title {
+  text-decoration: underline;
 }
