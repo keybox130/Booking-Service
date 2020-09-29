@@ -102,6 +102,7 @@ div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
   display: flex;
   padding: 10px;
   flex-direction: column;
+  max-width: 400px;
 }
 
 .price-disclaimer {

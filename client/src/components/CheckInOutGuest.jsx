@@ -29,9 +29,8 @@ class CheckInOutGuest extends React.Component {
       adults: 1,
       children: 0,
       infants: 0,
-      model: false,
       maxGuests: this.props.room.max_guests,
-      active: false
+      active: false,
     };
 
     this.addAdult = this.addAdult.bind(this);
@@ -50,49 +49,70 @@ class CheckInOutGuest extends React.Component {
     this.setState({guestCount: num});
   }
 
-  openGuests() {
-    var self = this;
-    this.setState({model: true});
-  }
-
-  closeGuests() {
-    this.setState({model: false});
-  }
-
   addAdult() {
-    const num = this.state.adults + 1;
-    this.setState({adults: num},
-      () => this.setGuestCount());
+    let current = this.state.adults;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({adults: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      // Nothing yet;
+    }
   }
 
   removeAdult() {
-    const num = this.state.adults - 1;
-    this.setState({adults: num},
-      () => this.setGuestCount());
+    let current = this.state.adults;
+    if (current >= 2) {
+      current = current - 1;
+      this.setState({adults: current},
+        () => this.setGuestCount());
+    } else if (current <= 1) {
+      // Nothing yet;
+    }
   }
 
   addChildren() {
-    const num = this.state.children + 1;
-    this.setState({children: num},
-      () => this.setGuestCount());
+    let current = this.state.children;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({children: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      // Nothing yet;
+    }
   }
 
   removeChildren() {
-    const num = this.state.children - 1;
-    this.setState({children: num},
-      () => this.setGuestCount());
+    let current = this.state.children;
+    if (current >= 1) {
+      current = current - 1;
+      this.setState({children: current},
+        () => this.setGuestCount());
+    } else if (current <= 0) {
+      // Nothing yet;
+    }
   }
 
   addInfants() {
-    const num = this.state.infants + 1;
-    this.setState({infants: num},
-      () => this.setGuestCount());
+    let current = this.state.infants;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({infants: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      // Nothing yet;
+    }
   }
 
   removeInfants() {
-    const num = this.state.infants - 1;
-    this.setState({infants: num},
-      () => this.setGuestCount());
+    let current = this.state.infants;
+    if (current >= 1) {
+      current = current - 1;
+      this.setState({infants: current},
+        () => this.setGuestCount());
+    } else if (current <= 0) {
+      // Nothing yet;
+    }
   }
 
   handleOpen() {
@@ -107,7 +127,7 @@ class CheckInOutGuest extends React.Component {
   render() {
     console.log(this.props.max_guests);
     const { guestCount, checkIn, checkOut, active } = this.state;
-    const guestsRender =  active === true ?  <OpenedGuests maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
+    const guestsRender =  active === true ?  <OpenedGuests full={this.state.full} empty={this.state.empty} maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
       : <Guests handleOpen={this.handleOpen} guest={guestCount}/>;
     const checkInRender = checkIn ? <CheckIn date={checkIn} /> 
       : <h1>Loading...</h1>;
