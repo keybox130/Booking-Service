@@ -6,6 +6,7 @@ const DivRow = styled.div`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 15px;
 `;
 
 const FlexDiv = styled.div`
