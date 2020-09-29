@@ -116,7 +116,6 @@ class CheckInOutGuest extends React.Component {
   }
 
   handleOpen() {
-    console.log('test');
     if (this.state.active) {
       this.setState({active: false});
     } else if (!this.state.active) {
@@ -127,7 +126,7 @@ class CheckInOutGuest extends React.Component {
   render() {
     console.log(this.props.max_guests);
     const { guestCount, checkIn, checkOut, active } = this.state;
-    const guestsRender =  active === true ?  <OpenedGuests full={this.state.full} empty={this.state.empty} maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
+    const guestsRender =  active === true ?  <OpenedGuests maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
       : <Guests handleOpen={this.handleOpen} guest={guestCount}/>;
     const checkInRender = checkIn ? <CheckIn date={checkIn} /> 
       : <h1>Loading...</h1>;
