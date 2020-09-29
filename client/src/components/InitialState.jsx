@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PriceReviews from './PriceReviews.jsx';
 import CheckInOutGuest from './CheckInOutGuest.jsx';
+import Button from './Button.jsx';
 
 const Container = styled.div`
   border: 1px solid rgb(221, 221, 221);
@@ -13,18 +14,21 @@ const Container = styled.div`
 class InitialState extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { dateSelected: false };
   }
 
   render() {
-    let priceReviews = this.props.room ? <PriceReviews room={this.props.room[0]} />
+    const priceReviews = this.props.room ? <PriceReviews room={this.props.room[0]} />
       : <h1>Loading...</h1>;
-    let checkInOutGuest = this.props.room ? <CheckInOutGuest room={this.props.room[0]} />
+    const checkInOutGuest = this.props.room ? <CheckInOutGuest room={this.props.room[0]} />
+      : <h1>Loading...</h1>;
+    const button = this.state.dateSelected !== undefined ? <Button active={this.state.dateSelected} />
       : <h1>Loading...</h1>;
     return (
       <Container>
         {priceReviews}
         {checkInOutGuest}
+        {button}
       </Container>
     );
   }
