@@ -90,6 +90,51 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
     </DivRow>);
   }
 
+  let childrenButtons;
+  if (guest < maxGuests) {
+    if (count.children === 0 && guest < maxGuests) {
+      childrenButtons = ( <DivRow>
+        <img onClick={() => functions.removeChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
+        <h3>{count.children}</h3>
+        <img onClick={() => functions.addChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow>);
+    } else if (count.children >=1 && guest < maxGuests) {
+      childrenButtons = ( <DivRow>
+        <img onClick={() => functions.removeChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+        <h3>{count.children}</h3>
+        <img onClick={() => functions.addChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow>);
+    }
+  } else {
+    childrenButtons = ( <DivRow>
+      <img onClick={() => functions.removeChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+      <h3>{count.children}</h3>
+      <img onClick={() => functions.addChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/inactivePlus.png"/>
+    </DivRow>);
+  }
+
+  let infantsButtons;
+  if (guest < maxGuests) {
+    if (count.infants === 0 && guest < maxGuests) {
+      infantsButtons = ( <DivRow>
+        <img onClick={() => functions.removeInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
+        <h3>{count.infants}</h3>
+        <img onClick={() => functions.addInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow>);
+    } else if (count.infants >=1 && guest < maxGuests) {
+      infantsButtons = ( <DivRow>
+        <img onClick={() => functions.removeInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+        <h3>{count.infants}</h3>
+        <img onClick={() => functions.addInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow>);
+    }
+  } else {
+    infantsButtons = ( <DivRow>
+      <img onClick={() => functions.removeInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activeMinus.png"/>
+      <h3>{count.infants}</h3>
+      <img onClick={() => functions.addInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/inactivePlus.png"/>
+    </DivRow>);
+  }
   return (
   <div>
   <Container onClick={() => functions.handleOpen()}>
@@ -113,22 +158,14 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
         <h4>Children</h4>
         <GuestText>Ages 2-12</GuestText>
       </DivCol>
-      <DivRow>
-        <img onClick={() => functions.removeChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
-        <h3>{count.children}</h3>
-        <img onClick={() => functions.addChildren()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
-      </DivRow>
+      {childrenButtons}
     </SelectorDiv>
     <SelectorDiv>
       <DivCol>
         <h4>Infants</h4>
         <GuestText>Under 2</GuestText>
       </DivCol>
-      <DivRow>
-        <img onClick={() => functions.removeInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
-        <h3>{count.infants}</h3>
-        <img onClick={() => functions.addInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
-      </DivRow>
+      {infantsButtons}
     </SelectorDiv>
     <SelectorDiv>
       <GuestText>{maxGuests} guests maximun. Infants dont count toward the number of guests.</GuestText>
@@ -137,9 +174,11 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
   </div>
   );
 };
+
 {/* <DivRow>
-<img onClick={() => functions.removeAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
-<h3>{count.adults}</h3>
-<img onClick={() => functions.addAdult()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
-</DivRow> */}
+        <img onClick={() => functions.removeInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/inactiveMinus.png"/>
+        <h3>{count.infants}</h3>
+        <img onClick={() => functions.addInfants()} src="https://keybox.s3-us-west-1.amazonaws.com/activePlus.png"/>
+      </DivRow> */}
+
 export default OpenedGuests;
