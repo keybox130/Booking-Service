@@ -29,9 +29,10 @@ class CheckInOutGuest extends React.Component {
       adults: 1,
       children: 0,
       infants: 0,
-      model: false,
       maxGuests: this.props.room.max_guests,
-      active: false
+      active: false,
+      full: false,
+      empty: true
     };
 
     this.addAdult = this.addAdult.bind(this);
@@ -59,40 +60,95 @@ class CheckInOutGuest extends React.Component {
     this.setState({model: false});
   }
 
+
   addAdult() {
-    const num = this.state.adults + 1;
-    this.setState({adults: num},
-      () => this.setGuestCount());
+    let current = this.state.adults;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({adults: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      this.setState({full: true});
+    }
   }
 
   removeAdult() {
-    const num = this.state.adults - 1;
-    this.setState({adults: num},
-      () => this.setGuestCount());
+    let current = this.state.adults;
+    if (current >= 2) {
+      current = current - 1;
+      this.setState({adults: current},
+        () => this.setGuestCount());
+    } else if (current <= 1) {
+      this.setState({empty: true});
+    }
   }
+
+  // addChildren() {
+  //   const num = this.state.children + 1;
+  //   this.setState({children: num},
+  //     () => this.setGuestCount());
+  // }
 
   addChildren() {
-    const num = this.state.children + 1;
-    this.setState({children: num},
-      () => this.setGuestCount());
+    let current = this.state.children;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({children: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      this.setState({full: true});
+    }
   }
+
+  // removeChildren() {
+  //   const num = this.state.children - 1;
+  //   this.setState({children: num},
+  //     () => this.setGuestCount());
+  // }
 
   removeChildren() {
-    const num = this.state.children - 1;
-    this.setState({children: num},
-      () => this.setGuestCount());
+    let current = this.state.children;
+    if (current >= 1) {
+      current = current - 1;
+      this.setState({children: current},
+        () => this.setGuestCount());
+    } else if (current <= 0) {
+      this.setState({empty: true});
+    }
   }
+
+  // addInfants() {
+  //   const num = this.state.infants + 1;
+  //   this.setState({infants: num},
+  //     () => this.setGuestCount());
+  // }
 
   addInfants() {
-    const num = this.state.infants + 1;
-    this.setState({infants: num},
-      () => this.setGuestCount());
+    let current = this.state.infants;
+    if (current < this.state.maxGuests) {
+      current = current + 1;
+      this.setState({infants: current},
+        () => this.setGuestCount());
+    } else if (this.state.guestCount === this.state.maxGuests) {
+      this.setState({full: true});
+    }
   }
 
+  // removeInfants() {
+  //   const num = this.state.infants - 1;
+  //   this.setState({infants: num},
+  //     () => this.setGuestCount());
+  // }
+
   removeInfants() {
-    const num = this.state.infants - 1;
-    this.setState({infants: num},
-      () => this.setGuestCount());
+    let current = this.state.infants;
+    if (current >= 1) {
+      current = current - 1;
+      this.setState({infants: current},
+        () => this.setGuestCount());
+    } else if (current <= 0) {
+      this.setState({empty: true});
+    }
   }
 
   handleOpen() {
