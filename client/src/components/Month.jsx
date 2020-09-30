@@ -33,6 +33,14 @@ class Months extends React.Component {
     this.state = {};
   }
 
+  renderMonths() {
+    let months = [
+      {name: January, days: 31},
+      {name: February, days: 28},
+      {name: March, days: 31}
+    ];
+  }
+
   render() {
     const daysOfWeek = (
     <WeekHolder>

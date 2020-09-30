@@ -155,7 +155,7 @@ class Calendar extends React.Component {
         <FlexRow>
           <FlexCol>
             {nights === false ? <BoldDays>Select dates</BoldDays> : <h1>{nights}</h1>}
-            {min_days ? <SecondaryText>Minimun stay: {min_days} nights</SecondaryText> : <h1>Loading...</h1>}
+            {min_days ? <SecondaryText>Minimum stay: {min_days} nights</SecondaryText> : <h1>Loading...</h1>}
           </FlexCol>
           <SelectedHolder>
             {checkIn}
