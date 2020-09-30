@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Month from './Month.jsx';
 
 const FlexRow = styled.div`
   display: flex;
@@ -48,7 +47,6 @@ class MonthSlider extends React.Component {
           <MonthName>September 2020</MonthName>
          <ArrowContainer><img src="https://keybox.s3-us-west-1.amazonaws.com/activeRightArrow.png" /></ArrowContainer>
         </FlexRow>
-        <Month />
       </div>
     );
   }

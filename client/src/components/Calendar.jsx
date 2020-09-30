@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MonthSlider from './MonthSlider.jsx';
+import Day from './Day.jsx';
 
 const Container = styled.div`
   background: rgb(255, 255, 255) !important;
@@ -163,6 +164,7 @@ class Calendar extends React.Component {
           </SelectedHolder>
         </FlexRow>
         <MonthSlider />
+        <Day />
       </Container>
     );
   }
