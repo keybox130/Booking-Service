@@ -4,6 +4,7 @@ import Guests from './Guests.jsx';
 import CheckIn from './CheckIn.jsx';
 import CheckOut from './CheckOut.jsx';
 import OpenedGuests from './OpenedGuests.jsx';
+import Calendar from './Calendar.jsx';
 
 const Container = styled.div`
   border-radius: 8px;
@@ -41,6 +42,7 @@ class CheckInOutGuest extends React.Component {
     this.removeInfants = this.removeInfants.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.setGuestCount = this.setGuestCount.bind(this);
+    this.handleCheckIn = this.handleCheckIn.bind(this);
   }
 
   setGuestCount() {
@@ -116,7 +118,6 @@ class CheckInOutGuest extends React.Component {
   }
 
   handleOpen() {
-    console.log('test');
     if (this.state.active) {
       this.setState({active: false});
     } else if (!this.state.active) {
@@ -124,15 +125,20 @@ class CheckInOutGuest extends React.Component {
     }
   }
 
+  handleCheckIn(e) {
+    e.preventDefault();
+    this.setState({checkIn: e.target.value});
+  }
+
   render() {
-    console.log(this.props.max_guests);
     const { guestCount, checkIn, checkOut, active } = this.state;
-    const guestsRender =  active === true ?  <OpenedGuests full={this.state.full} empty={this.state.empty} maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
+    const guestsRender =  active === true ?  <OpenedGuests maxGuests={this.state.maxGuests} guest={guestCount} functions={{addAdult: this.addAdult, removeAdult: this.removeAdult, addChildren: this.addChildren, removeChildren: this.removeChildren, addInfants: this.addInfants, removeInfants: this.removeInfants, handleOpen: this.handleOpen}} count={this.state}/>   
       : <Guests handleOpen={this.handleOpen} guest={guestCount}/>;
     const checkInRender = checkIn ? <CheckIn date={checkIn} /> 
       : <h1>Loading...</h1>;
     const checkOutRender = checkOut ? <CheckOut date={checkOut} />
       : <h1>Loading...</h1>;
+    const cal = <Calendar />;
     return (
       <Container>
         <FlexRow>
@@ -144,5 +150,8 @@ class CheckInOutGuest extends React.Component {
     );
   }
 }
+// {checkInRender}
+//           {checkOutRender}
 
+// {openCheckInOut}
 export default CheckInOutGuest;

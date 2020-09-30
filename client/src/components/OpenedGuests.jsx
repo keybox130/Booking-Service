@@ -66,6 +66,15 @@ const DivRow = styled.div`
   justify-content: center;
 `;
 
+const CloseButton = styled.div`
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+`;
+
 const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
   let adultsButtons;
   if (guest < maxGuests) {
@@ -170,6 +179,7 @@ const OpenedGuests = ({ functions, guest, count, maxGuests }) => {
     <SelectorDiv>
       <GuestText>{maxGuests} guests maximun. Infants dont count toward the number of guests.</GuestText>
     </SelectorDiv>
+    <CloseButton onClick={() => functions.handleOpen()}><h3>Close</h3></CloseButton>
   </Holder>
   </div>
   );
