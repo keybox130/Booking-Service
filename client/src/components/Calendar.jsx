@@ -55,38 +55,100 @@ const SmallBoldText = styled.h4`
 const CheckInHolder = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 60px 10px 10px;
+  padding: 10px 10px 10px 10px;
 `;
 
 const CheckOutHolder = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 60px 10px 10px;
+  padding: 10px 10px 10px 10px;
 `;
 
 const SelectedDateHolder = styled.div`
   border: 2px solid black;
   background-color: white;
-  padding: 10px 60px 10px 10px;
+  padding: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
 `;
 
 const Form = styled.input`
-  
+  color: #717171;
+  font-weight: 500;
+  font-size: 14px;
+  border: transparent;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
 `;
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {nights: false, checkIn: 'Add date', checkOut: 'Add date'};
+    this.state = 
+    {
+      nights: false, 
+      checkIn: 'Add date', 
+      checkOut: 'Add date',
+      checkInActive: false,
+      checkOutActive: false,
+    };
+
+    this.handleCheckInForm = this.handleCheckInForm.bind(this);
+    this.handleCheckOutForm = this.handleCheckOutForm.bind(this);
+    this.selectCheckIn = this.selectCheckIn.bind(this);
+    this.selectCheckOut = this.selectCheckOut.bind(this);
+  }
+
+  handleCheckInForm(e) {
+    e.preventDefault();
+    this.setState({checkIn: e.target.value});
+  }
+
+  handleCheckOutForm(e) {
+    e.preventDefault();
+    this.setState({checkOut: e.target.value})
+  }
+
+  selectCheckIn() {
+    const { checkInActive, checkOutActive } = this.state;
+    if (!checkInActive) {
+      this.setState({checkInActive: true, checkOutActive: false});
+    }
+  }
+
+  selectCheckOut() {
+    const { checkInActive, checkOutActive } = this.state;
+    if (!checkOutActive) {
+      this.setState({checkInActive: false, checkOutActive: true});
+    }
   }
 
   render() {
-    const { nights } = this.state;
+    const { nights, checkInActive, checkOutActive } = this.state;
     const { room } = this.props;
     const { min_days } = room;
+
+    let checkIn = checkInActive === true ? (
+    <SelectedDateHolder onClick={this.selectCheckIn}>
+      <SmallBoldText>CHECK-IN</SmallBoldText>
+      <Form onChange={this.handleCheckInForm} value={this.state.checkIn.length > 0 ? this.state.checkIn : `MM/DD/YYYY`}/>
+    </SelectedDateHolder>)
+      : (<CheckInHolder onClick={this.selectCheckIn}>
+        <SmallBoldText>CHECK-IN</SmallBoldText>
+        <Form onChange={this.handleCheckInForm} value={this.state.checkIn.length > 0 ? this.state.checkIn : `MM/DD/YYYY`}/>
+      </CheckInHolder>);
+
+    let checkOut = checkOutActive === true ? (
+      <SelectedDateHolder onClick={this.selectCheckOut}>
+        <SmallBoldText>CHECK-IN</SmallBoldText>
+        <Form onChange={this.handleCheckOutForm} value={this.state.checkOut.length > 0 ? this.state.checkOut : `MM/DD/YYYY`}/>
+      </SelectedDateHolder>)
+        : (<CheckOutHolder onClick={this.selectCheckOut}>
+          <SmallBoldText>CHECK-IN</SmallBoldText>
+          <Form onChange={this.handleCheckOutForm} value={this.state.checkOut.length > 0 ? this.state.checkOut : `MM/DD/YYYY`}/>
+        </CheckOutHolder>);
     return (
       <Container>
         <FlexRow>
@@ -95,14 +157,8 @@ class Calendar extends React.Component {
             {min_days ? <SecondaryText>Minimun stay: {min_days} nights</SecondaryText> : <h1>Loading...</h1>}
           </FlexCol>
           <SelectedHolder>
-            <SelectedDateHolder>
-              <SmallBoldText>CHECK-IN</SmallBoldText>
-              <SecondaryText>{this.state.checkIn}</SecondaryText>
-            </SelectedDateHolder>
-            <CheckOutHolder>
-              <SmallBoldText>CHECKOUT</SmallBoldText>
-              <SecondaryText>{this.state.checkOut}</SecondaryText>
-            </CheckOutHolder>
+            {checkIn}
+            {checkOut}
           </SelectedHolder>
         </FlexRow>
       </Container>
