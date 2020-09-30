@@ -43,7 +43,7 @@ const DisclaimerText = styled.p`
 
 
 const PriceDisplay = ({ data, active }) => {
-  if (active) {
+  if (!active) {
     return (
       <Container>
       <DisclaimerText>You wont be charged yet</DisclaimerText>

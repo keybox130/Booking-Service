@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MonthSlider from './MonthSlider.jsx';
 import Day from './Day.jsx';
+import DateSpan from './DateSpan.jsx';
 
 const Container = styled.div`
   background: rgb(255, 255, 255) !important;
@@ -15,6 +16,14 @@ const Container = styled.div`
   width: 661px !important;
   z-index: 1 !important;
   min-height: 460px !important;
+`;
+
+const FlexLeftRow = styled.div`
+  display: flex;
+  margin-right: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 const FlexRow = styled.div`
@@ -83,6 +92,29 @@ const Form = styled.input`
   margin: 0;
   padding: 0;
   background-color: transparent;
+`;
+
+const ClearDates = styled.p`
+  text-decoration: underline;
+  color: #222222;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+`;
+
+const CloseButton = styled.div`
+  border-radius: 8px;
+  color: white;
+  background-color:#222222;
+  padding: 8px;
+  min-width: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer;
 `;
 
 class Calendar extends React.Component {
@@ -164,7 +196,11 @@ class Calendar extends React.Component {
           </SelectedHolder>
         </FlexRow>
         <MonthSlider />
-        <Day />
+        <DateSpan />
+        <FlexLeftRow>
+          <ClearDates>Clear dates</ClearDates>
+          <CloseButton>Close</CloseButton>
+        </FlexLeftRow>
       </Container>
     );
   }

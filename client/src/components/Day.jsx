@@ -58,25 +58,39 @@ const ChainedContainer = styled.div`
   background-color: #F6F6F6;
 `;
 
+const DayOfWeekContainer = styled.div`
+  padding: 10px;
+  height: 15px;
+  width: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #727272;
+`;
+
 class Day extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {day: null, state: null}
+    this.state = {day: null, state: null, type: ''}
   }
 
-  handleClick() {
-
+  sendClickDate() {
+    const { day } = this.state;
   }
-
   componentDidMount() {
-    this.setState({day: this.props.day});
+    this.setState({day: this.props.date, type: this.props.type});
   }
 
   render() {
+    let button = this.state.type === 'dow' ? (<DayOfWeekContainer><p>{this.state.day}</p></DayOfWeekContainer>) 
+      :  (<NormalContainer><p>{this.state.day}</p></NormalContainer>);
     return (
-      <ChainedContainer>
-        <p>1</p>
-      </ChainedContainer>
+    <div>
+      {button}
+    </div>
     );
   }
 }

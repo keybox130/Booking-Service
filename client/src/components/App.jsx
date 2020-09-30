@@ -42,12 +42,13 @@ class App extends React.Component {
     }
     return (
       <div>
-        <img src="https://keybox.s3-us-west-1.amazonaws.com/pepe.jpeg"/>
         {cal}
         {render}
       </div>
     );
   }
 }
+
+// <img src="https://keybox.s3-us-west-1.amazonaws.com/pepe.jpeg"/> pepe
 
 export default App;
