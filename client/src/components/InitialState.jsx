@@ -4,6 +4,7 @@ import PriceReviews from './PriceReviews.jsx';
 import CheckInOutGuest from './CheckInOutGuest.jsx';
 import Button from './Button.jsx';
 import PriceDisplay from './PriceDisplay.jsx';
+import Calendar from './Calendar.jsx';
 
 const Container = styled.div`
   border: 1px solid rgb(221, 221, 221);
@@ -27,6 +28,8 @@ class InitialState extends React.Component {
       : <h1>Loading...</h1>;
     const priceDisplay = this.state.dateSelected !== undefined ? <PriceDisplay active={this.state.dateSelected} />
       : <h1>Loading...</h1>
+      const cal = this.props.room ? <Calendar roomData={this.props.room[0]} />
+        : <h1>Loading...</h1>;
     return (
       <Container>
         {priceReviews}

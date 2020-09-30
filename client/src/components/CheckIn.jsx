@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 10px;
-  padding-right: 10;
+  padding-right: 86px;
   padding-left: 10px;
   padding-bottom: 10px;
 `;
@@ -21,11 +21,13 @@ const DateText = styled.p`
   color: #707070;
 `;
 
-const CheckIn = ({ date }) => (
-  <Container>
-    <SmallBoldTitle>CHECK-IN</SmallBoldTitle>
-    <DateText>{date}</DateText>
-  </Container>
-);
+const CheckIn = ({ date }) => {
+  return (
+    <Container>
+      <SmallBoldTitle>CHECK-IN</SmallBoldTitle>
+      <DateText>{date}</DateText>
+    </Container>
+  )
+}
 
 export default CheckIn;

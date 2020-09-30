@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import InitialState from './InitialState.jsx';
+import Calendar from './Calendar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,9 +33,17 @@ class App extends React.Component {
     } else {
       render = <h1>Loading...</h1>;
     }
+
+    let cal;
+    if (this.state.room) {
+      cal = <Calendar room={this.state.room[0]} />;
+    } else {
+      cal = <h1>Loading...</h1>;
+    }
     return (
       <div>
         <img src="https://keybox.s3-us-west-1.amazonaws.com/pepe.jpeg"/>
+        {cal}
         {render}
       </div>
     );
