@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Month from './Month.jsx';
 
 const FlexRow = styled.div`
   display: flex;
@@ -8,6 +9,12 @@ const FlexRow = styled.div`
   flex-direction: row;
   margin-top: 35px;
   margin-bottom: 15px;
+`;
+
+const FlexRowEven = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
 `;
 
 const MonthName = styled.h3`
@@ -41,6 +48,7 @@ class MonthSlider extends React.Component {
           <MonthName>September 2020</MonthName>
          <ArrowContainer><img src="https://keybox.s3-us-west-1.amazonaws.com/activeRightArrow.png" /></ArrowContainer>
         </FlexRow>
+        <Month />
       </div>
     );
   }
