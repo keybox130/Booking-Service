@@ -31,6 +31,7 @@ const NormalContainer = styled.div`
   border-radius: 100px;
   :hover {
     border: 0.5px solid #373737;
+    cursor: pointer;
   }
   color: #373737;
   width: 15px;
@@ -47,6 +48,9 @@ const ChainContainer = styled.div`
   background-color: whitesmoke;
   :hover {
     border: 0.5px solid #373737;
+    border-radius: 100px;
+    background-color: white;
+    cursor: pointer;
   }
   color: #373737;
   width: 15px;
@@ -64,6 +68,7 @@ const SelectedContainer = styled.div`
   border-radius: 100px;
   width: 15px;
   height: 15px;
+  cursor: pointer;
 `;
 
 class Day extends React.Component {
@@ -82,6 +87,11 @@ class Day extends React.Component {
       : null;
     return(
       <div>
+      <EmptyContainer><p></p></EmptyContainer>
+      <UsedContainer><p>1</p></UsedContainer>
+      <NormalContainer><p>1</p></NormalContainer>
+      <ChainContainer><p>1</p></ChainContainer>
+      <SelectedContainer><p>1</p></SelectedContainer>
       </div>
     );
   }
