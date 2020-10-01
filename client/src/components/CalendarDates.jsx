@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import CalendarMonths from './CalendarMonths.jsx';
 
 import CalendarDateSlider from './CalendarDateSlider.jsx';
 
@@ -23,6 +24,7 @@ class CalendarDates extends React.Component {
     return (
       <Container>
         <CalendarDateSlider room={room} calendar={calendar}/>
+        <CalendarMonths room={room} calendar={calendar}/>
       </Container>
     );
   }
