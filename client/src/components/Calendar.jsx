@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CalendarTitle from './CalendarTitle.jsx';
+import CalendarDates from './CalendarDates.jsx';
 
 const Container = styled.div`
   background: rgb(255, 255, 255) !important;
@@ -44,10 +45,12 @@ class Calendar extends React.Component {
       handleStartDate: this.updateStartDateOnInput,
       handleEndDate: this.updateEndDateOnInput,
     };
-    let title = room ? <CalendarTitle room={room} calendar={this.state} functions={functions}/> : <h1>Loading...</h1>
+    let title = room ? <CalendarTitle room={room} calendar={this.state} functions={functions}/> : <h1>Loading...</h1>;
+    let calendarDates = room ? <CalendarDates room={room} calendar={this.state} /> : <h1>Loading...</h1>;
     return (
       <Container>
         {title}
+        {calendarDates}
       </Container>
     );
   }
