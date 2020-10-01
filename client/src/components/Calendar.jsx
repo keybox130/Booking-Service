@@ -26,6 +26,7 @@ class Calendar extends React.Component {
     // Bindings
     this.updateStartDateOnInput = this.updateStartDateOnInput.bind(this);
     this.updateEndDateOnInput = this.updateEndDateOnInput.bind(this);
+    this.parseInitialDate = this.parseInitialDate.bind(this);
   }
 
   updateStartDateOnInput(e) {
@@ -38,6 +39,22 @@ class Calendar extends React.Component {
     this.setState({endDate: e.target.value});
   }
 
+  parseInitialDate() {
+    const { room } = this.props;
+    const { starting_date } = room;
+    const roomDate = starting_date;
+    const format = roomDate.split('').splice(0, 10).join('');
+    const year = format.split('-').slice(0,1).join('');
+    const month = format.split('-').slice(1,2).join('');
+    const day = format.split('-').slice(2,3).join('');
+    const date = {month, day, year};
+    this.setState({startingDate: date});
+  }
+
+  componentDidMount() {
+    this.parseInitialDate();
+  }
+
   render() {
     const { room } = this.props;
     const functions = 
@@ -46,7 +63,7 @@ class Calendar extends React.Component {
       handleEndDate: this.updateEndDateOnInput,
     };
     let title = room ? <CalendarTitle room={room} calendar={this.state} functions={functions}/> : <h1>Loading...</h1>;
-    let calendarDates = room ? <CalendarDates room={room} calendar={this.state} /> : <h1>Loading...</h1>;
+    let calendarDates = this.state.startingDate ? <CalendarDates room={room} calendar={this.state} /> : <h1>Loading...</h1>;
     return (
       <Container>
         {title}

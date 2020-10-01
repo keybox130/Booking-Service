@@ -17,9 +17,12 @@ class CalendarDates extends React.Component {
   }
 
   render() {
+    const { room, calendar } = this.props;
+    console.log('here')
+    console.log(calendar);
     return (
       <Container>
-        <CalendarDateSlider />
+        <CalendarDateSlider room={room} calendar={calendar}/>
       </Container>
     );
   }
