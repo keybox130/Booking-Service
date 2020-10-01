@@ -20,12 +20,31 @@ const Container = styled.div`
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {startDate: 'MM/DD/YYYY', endDate: 'MM/DD/YYYY'};
+
+    // Bindings
+    this.updateStartDateOnInput = this.updateStartDateOnInput.bind(this);
+    this.updateEndDateOnInput = this.updateEndDateOnInput.bind(this);
+  }
+
+  updateStartDateOnInput(e) {
+    e.preventDefault();
+    this.setState({startDate: e.target.value});
+  }
+
+  updateEndDateOnInput(e) {
+    e.preventDefault();
+    this.setState({endDate: e.target.value});
   }
 
   render() {
     const { room } = this.props;
-    let title = room ? <CalendarTitle room={room}/> : <h1>Loading...</h1>
+    const functions = 
+    {
+      handleStartDate: this.updateStartDateOnInput,
+      handleEndDate: this.updateEndDateOnInput,
+    };
+    let title = room ? <CalendarTitle room={room} calendar={this.state} functions={functions}/> : <h1>Loading...</h1>
     return (
       <Container>
         {title}

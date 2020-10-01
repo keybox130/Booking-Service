@@ -47,6 +47,7 @@ class CalendarTitle extends React.Component {
   }
 
   render() {
+    const { room, calendar, functions } = this.props;
     let title = this.props.daysum ? <TitleFont>{this.props.daysum}</TitleFont> 
       : <TitleFont>Select dates</TitleFont>;
     let dateRange = this.props.dateRange ? <SubText>{this.props.dateRange}</SubText> 
@@ -59,7 +60,7 @@ class CalendarTitle extends React.Component {
           {dateRange}
         </Col>
         <RowContainer>
-          <CalendarTitleInOut />
+          <CalendarTitleInOut room={room} functions={functions} calendar={calendar}/>
         </RowContainer>
       </Container>
     );
