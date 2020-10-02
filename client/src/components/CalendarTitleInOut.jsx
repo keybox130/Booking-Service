@@ -62,7 +62,6 @@ class CalendarTitleInOut extends React.Component {
   render() {
     const { checkIn, checkOut } = this.state;
     const { room, functions, calendar } = this.props;
-    console.log(calendar);
     let checkInForm = calendar.startDate !== undefined ? <Form onChange={functions.handleStartDate} value={calendar.startDate} /> 
       : <Form value="Add date" />;
     let checkOutForm = calendar.endDate !== undefined ? <Form onChange={functions.handleEndDate} value={calendar.endDate} />

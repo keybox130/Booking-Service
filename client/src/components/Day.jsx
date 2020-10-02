@@ -74,12 +74,14 @@ const SelectedContainer = styled.div`
 class Day extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
     const { type, value } = this.props;
-    let render = type === null ? <EmptyContainer><p></p></EmptyContainer>
+    console.log('THESE ARE THE PROPS')
+    console.log(type, value);
+    let render = type === 'empty' ? <EmptyContainer><p></p></EmptyContainer>
       : type === 'used' ? <UsedContainer><p>{value}</p></UsedContainer>
       : type === 'normal' ? <NormalContainer><p>{value}</p></NormalContainer>
       : type === 'chain' ? <ChainContainer><p>{value}</p></ChainContainer>
@@ -87,11 +89,7 @@ class Day extends React.Component {
       : null;
     return(
       <div>
-      <EmptyContainer><p></p></EmptyContainer>
-      <UsedContainer><p>1</p></UsedContainer>
-      <NormalContainer><p>1</p></NormalContainer>
-      <ChainContainer><p>1</p></ChainContainer>
-      <SelectedContainer><p>1</p></SelectedContainer>
+      {render}
       </div>
     );
   }

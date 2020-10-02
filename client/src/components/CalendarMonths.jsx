@@ -34,36 +34,20 @@ class CalendarMonths extends React.Component {
     super(props);
     this.state = 
     {
-      monthInfo: [
-        {month: '01', name: 'January', days: 31},
-        {month: '02', name: 'February', days: 28},
-        {month: '03', name: 'March', days: 31},
-        {month: '04', name: 'April', days: 30},
-        {month: '05', name: 'May', days: 31},
-        {month: '06', name: 'June', days: 30},
-        {month: '07', name: 'July', days: 31},
-        {month: '08', name: 'August', days: 31},
-        {month: '09', name: 'September', days: 30},
-        {month: '10', name: 'October', days: 31},
-        {month: '11', name: 'November', days: 30},
-        {month: '12', name: 'December', days: 31},
-      ]
+
     };
   }
 
-  initializeMonths() {
-    const blankRender = [];
-    for (let i = 0; i < 12; i++) {
-
-    }
-  }
-
+ 
   render() {
+    const { format } = this.props; // Arr of 12 months each has name: STR and weeks: ARR. //Weeks: 5 arr of 7 obj each has type + value elems
+    let october = format[9].weeks;
+    let octoberRender = october.map(week => <Week>{week.map(day => <Day type={day.type} value={day.value}/>)}</Week>);
     return (
       <Container>
         <Col>
           <CalendarDaysOfWeek />
-          <Day />
+          {octoberRender}
         </Col>
         <Col>
           <CalendarDaysOfWeek />
