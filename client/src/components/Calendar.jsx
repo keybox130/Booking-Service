@@ -116,13 +116,14 @@ class Calendar extends React.Component {
                 month.days.push(day);
                 emptyStarting--;
               } else if (amountOfDays > 0) {
-                if (dayTwo !== dayValue) {
+                if (dayTwo !== dayValue && chain === true) {
                   day.type = 'chain';
                   day.value = dayValue;
                   dayValue++;
                   month.days.push(day);
                   amountOfDays--;
                 } else if (dayTwo === dayValue) {
+                  chain = false;
                   day.type = 'selected';
                   day.value = dayValue;
                   dayValue++;
