@@ -60,7 +60,6 @@ class CalendarDateSlider extends React.Component {
   }
 
   setInitialMonths() {
-    console.log(this.props);
     const { calendar } = this.props;
     const { startingDate } = calendar;
     const { month, year } = startingDate;
@@ -88,8 +87,7 @@ class CalendarDateSlider extends React.Component {
     left = left + ' ' + '2020';
     right = right + ' ' +  '2020';
     next = next + ' ' +  '2020';
-    this.setState({leftMonth: left, rightMonth: right, nextMonth: next},
-      () => console.log(this.state));
+    this.setState({leftMonth: left, rightMonth: right, nextMonth: next});
   }
 
   componentDidMount() {
