@@ -20,6 +20,7 @@ const UsedContainer = styled.div`
   font-size: 14px;
   width: 15px;
   height: 15px;
+  font-weight: bold;
 `;
 
 const NormalContainer = styled.div`
@@ -36,6 +37,7 @@ const NormalContainer = styled.div`
   color: #373737;
   width: 15px;
   height: 15px;
+  font-weight: bold;
 `;
 
 const ChainContainer = styled.div`
@@ -55,6 +57,7 @@ const ChainContainer = styled.div`
   color: #373737;
   width: 15px;
   height: 15px;
+  font-weight: bold;
 `;
 
 const SelectedContainer = styled.div`
@@ -69,6 +72,7 @@ const SelectedContainer = styled.div`
   width: 15px;
   height: 15px;
   cursor: pointer;
+  font-weight: bold;
 `;
 
 class Day extends React.Component {

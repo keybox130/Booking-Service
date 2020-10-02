@@ -42,7 +42,9 @@ class CalendarMonths extends React.Component {
   render() {
     const { format } = this.props; // Arr of 12 months each has name: STR and weeks: ARR. //Weeks: 5 arr of 7 obj each has type + value elems
     let october = format[9].weeks;
+    let november = format[10].weeks;
     let octoberRender = october.map(week => <Week>{week.map(day => <Day type={day.type} value={day.value}/>)}</Week>);
+    let novemberRender = november.map(week => <Week>{week.map(day => <Day type={day.type} value={day.value}/>)}</Week>);
     return (
       <Container>
         <Col>
@@ -51,6 +53,7 @@ class CalendarMonths extends React.Component {
         </Col>
         <Col>
           <CalendarDaysOfWeek />
+          {novemberRender}
         </Col>
       </Container>
     );

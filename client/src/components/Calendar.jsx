@@ -50,17 +50,7 @@ class Calendar extends React.Component {
   }
 
   initCalendar(monthOne = null, dayOne = null, monthTwo = null, dayTwo = null) {
-    const { monthInfo, startingDate } = this.state;
-    //Need to render out 1 day component for each month (starting in october 2020)
-    //Can pass type props in, and date, but also need to be able to mutate it to update...
-    //That means this function has to take in a target date and month to re-render.
-    //Using monthOne and dayOne -> monthTwo, dayTwo we can re-run this function passing those as the selected dates.
-    //We can just have the onClick change in the day, and only render it when there are two selected. (if else)
-
-    //every month will have a 7 x 5 grid to maintain consistency in render(and to make it easy to splice out weeks);
-    //Each one needs to be in its own month object (for slider purposes)
-    
-
+    const { monthInfo } = this.state;
     if (monthOne === null) { //Just render all days as per normal
       let yearArr = [];
       for (let i = 0; i < monthInfo.length; i ++) {
@@ -93,6 +83,149 @@ class Calendar extends React.Component {
           }
         }
         yearArr.push(month);
+      } 
+      this.setState({renderData: yearArr});
+    } else if (monthOne && dayOne && monthTwo && dayTwo) {
+      let yearArr = [];
+      let continueMe = false;
+      let chain = false;
+      for (let i = 0; i < monthInfo.length; i++) {
+        //Create Month Storage
+        let month = {};
+        month.name = monthInfo[i].name;
+        month.year = monthInfo[i].year;
+        month.days = [];
+        //Get params
+        let emptyStarting = monthInfo[i].emptyStart;
+        let emptyEnding = monthInfo[i].emptyEnd;
+        let amountOfDays = monthInfo[i].days;
+        //Set up values
+        let dayValue = 1;
+        //Grab keys
+        const monthKey = monthInfo[i].month;
+        //Check for chain start, else just make normal days
+        if (monthOne === monthKey || continueMe === true) {
+          continueMe = true;
+          if (monthTwo === monthKey) { //Ending month
+            continueMe = false;
+            for (let j = 0; j < 35; j++) {
+              let day = {};
+              if (emptyStarting > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyStarting--;
+              } else if (amountOfDays > 0) {
+                if (dayTwo !== dayValue) {
+                  day.type = 'chain';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                } else if (dayTwo === dayValue) {
+                  day.type = 'selected';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                } else {
+                  day.type = 'normal';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                }
+              } else if (emptyEnding > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyEnding--;
+              }
+            }
+            yearArr.push(month);
+          } else if (monthOne === monthKey) { //Starting month
+            for (let j = 0; j < 35; j++) {
+              let day = {};
+              if (emptyStarting > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyStarting--;
+              } else if (amountOfDays > 0) {
+                if (dayOne === dayValue) { //Starting date
+                  chain = true;
+                  day.type = 'selected';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                } else if (chain) {
+                  day.type = 'chain';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                } else {
+                  day.type = 'normal';
+                  day.value = dayValue;
+                  dayValue++;
+                  month.days.push(day);
+                  amountOfDays--;
+                }
+              } else if (emptyEnding > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyEnding--;
+              }
+            }
+            yearArr.push(month);
+          } else { //Continue entire month as chains
+            for (let j = 0; j < 35; j++) {
+              let day = {};
+              if (emptyStarting > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyStarting--;
+              } else if (amountOfDays > 0) {
+                day.type = 'chain';
+                day.value = dayValue;
+                dayValue++;
+                month.days.push(day);
+                amountOfDays--;
+              } else if (emptyEnding > 0) {
+                day.type = 'empty';
+                day.value = '';
+                month.days.push(day);
+                emptyEnding--;
+              }
+            }
+            yearArr.push(month);
+          }
+        } else if (continueMe !== true) {
+          for (let j = 0; j < 35; j++) {
+            let day = {};
+            if (emptyStarting > 0) {
+              day.type = 'empty';
+              day.value = '';
+              month.days.push(day);
+              emptyStarting--;
+            } else if (amountOfDays > 0) {
+              day.type = 'normal';
+              day.value = dayValue;
+              dayValue++;
+              month.days.push(day);
+              amountOfDays--;
+            } else if (emptyEnding > 0) {
+              day.type = 'empty';
+              day.value = '';
+              month.days.push(day);
+              emptyEnding--;
+            }
+          }
+          yearArr.push(month);
+        }
       }
       this.setState({renderData: yearArr});
     }
@@ -122,7 +255,7 @@ class Calendar extends React.Component {
 
   componentDidMount() {
     this.parseInitialDate();
-    this.initCalendar();
+    this.initCalendar('01', 15, '11', 18);
   }
 
   render() {
