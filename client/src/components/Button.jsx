@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.div`
+const Container = styled.div`
   padding: 15px;
   border-radius: 8px;
   color: white;
@@ -12,15 +12,28 @@ const StyledButton = styled.div`
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
+  font-weight: bold;
 `;
 
-const Button = ({ active }) => {
-  const text = active === true ? <h2>Reserve</h2> : <h2>Check availability</h2>;
-  return (
-    <StyledButton>
-      {text}
-    </StyledButton>
-  );
+class Button extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { active } = this.props;
+    const text = !active
+      ? 'Check availability'
+      : 'Reserve';
+    return (
+      <div>
+        <Container>
+          {text}
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default Button;

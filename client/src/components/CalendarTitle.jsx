@@ -1,67 +1,132 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CalendarTitleInOut from './CalendarTitleInOut.jsx';
-
-const RowContainer = styled.div`
-  display: flex;
-  align-items: left;
-  justify-content: flex-start;
-  flex-direction: row;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  background-color: whitesmoke;
-`;
-
+// Containers
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  align-items: left;
   justify-content: space-between;
+  flex-direction: row;
 `;
 
-const Col = styled.div`
+const TitleCol = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: left;
   justify-content: flex-start;
+  flex-direction: column;
 `;
 
-const TitleFont = styled.h2`
-  color: #222222;
+const CheckInOutContainer = styled.div`
+  display: flex;
+  align-items: left;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  border: 1px solid rgb(221, 221, 221);
+  color: #A7A7A7;
+  border-radius: 8px;
+`;
+
+const CheckInOutCol = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 10px;
+`;
+
+const CheckInOutColSelected = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  color: black;
+`;
+
+// Font Info
+const NightTitle = styled.h3`
   font-weight: 500;
-  font-size: 20px;
-  margin-bottom: 5px;
+  font-size: 16px;
+  margin-bottom: 15px;
 `;
 
-const SubText = styled.p`
-  color: #777777;
-  font-weight: 400;
-  font-size: 14px;
+const SecondaryText = styled.p`
+  color: #A7A7A7;
+  font-size: 12px;
+  font-weight: normal;
+`;
+
+const SmallBoldTitle = styled.h3`
+  font-weight: 500;
+  font-size: 12px;
+`;
+
+const FormText = styled.input`
+  border: transparent;
+  color: #787878;
+  background-color: transparent;
 `;
 
 class CalendarTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { checkInSelected: true, checkOutSelected: false };
+    // Bindings
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { checkInSelected } = this.state;
+    if (checkInSelected) {
+      this.setState({checkInSelected: false, checkOutSelected: true});
+    } else if (!checkInSelected) {
+      this.setState({checkInSelected: true, checkOutSelected: false})
+    }
   }
 
   render() {
-    const { room, calendar, functions } = this.props;
-    let title = this.props.daysum ? <TitleFont>{this.props.daysum}</TitleFont> 
-      : <TitleFont>Select dates</TitleFont>;
-    let dateRange = this.props.dateRange ? <SubText>{this.props.dateRange}</SubText> 
-      : this.props.room.min_days ? <SubText>Minimun stay: {this.props.room.min_days} nights</SubText>
-      : <h1>Error</h1>;
+    const { minDays, checkIn, checkOut } = this.props;
+    const { checkInSelected } = this.state;
+    const nightsRender = minDays
+      ? <TitleCol><NightTitle>Select dates</NightTitle><SecondaryText>Minimun stay: {minDays} nights</SecondaryText></TitleCol>
+      : <h1>Loading...</h1>;
+    const checkInOutRender = checkInSelected
+      ? (<CheckInOutContainer>
+        <CheckInOutColSelected onClick={() => this.handleClick()}>
+          <SmallBoldTitle>
+            CHECK-IN
+          </SmallBoldTitle>
+          <FormText value={checkIn}/>
+        </CheckInOutColSelected>
+        <CheckInOutCol onClick={() => this.handleClick()}>
+          <SmallBoldTitle>
+            CHECKOUT
+          </SmallBoldTitle>
+          <FormText value={checkOut}/>
+        </CheckInOutCol>
+      </CheckInOutContainer>)
+      : (<CheckInOutContainer>
+        <CheckInOutCol onClick={() => this.handleClick()}>
+          <SmallBoldTitle>
+            CHECK-IN
+          </SmallBoldTitle>
+          <FormText value={checkIn}/>
+        </CheckInOutCol>
+        <CheckInOutColSelected onClick={() => this.handleClick()}>
+          <SmallBoldTitle>
+            CHECKOUT
+          </SmallBoldTitle>
+          <FormText value={checkOut}/>
+        </CheckInOutColSelected>
+      </CheckInOutContainer>)
     return (
       <Container>
-        <Col>
-          {title}
-          {dateRange}
-        </Col>
-        <RowContainer>
-          <CalendarTitleInOut room={room} functions={functions} calendar={calendar}/>
-        </RowContainer>
+        {nightsRender}
+        {checkInOutRender}
       </Container>
     );
   }
