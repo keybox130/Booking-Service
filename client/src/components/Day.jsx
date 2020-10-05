@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Types
+
 const EmptyContainer = styled.div`
   display: flex;
   align-items: center;
@@ -75,26 +77,47 @@ const SelectedContainer = styled.div`
   font-weight: bold;
 `;
 
+const DayOfWeekContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  color: #CCCCCC;
+`;
+
 class Day extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state ={};
   }
 
+
   render() {
-    const { type, value } = this.props;
-    console.log('THESE ARE THE PROPS')
-    console.log(type, value);
-    let render = type === 'empty' ? <EmptyContainer><p></p></EmptyContainer>
-      : type === 'used' ? <UsedContainer><p>{value}</p></UsedContainer>
-      : type === 'normal' ? <NormalContainer><p>{value}</p></NormalContainer>
-      : type === 'chain' ? <ChainContainer><p>{value}</p></ChainContainer>
-      : type === 'selected' ? <SelectedContainer><p>{value}</p></SelectedContainer>
-      : null;
-    return(
-      <div>
-      {render}
-      </div>
+    const { type, value, dateHandlers, utc } = this.props;
+    let selected;
+    if (utc !== undefined) {
+      if ((utc.checkIn === value && value !== '') || (utc.checkOut === value && value !== '')) {
+        selected = true;
+      } else {
+        selected = false;
+      }
+    } 
+    const parsedDate = type !== 'dow' && value !== ''
+      ? value.getUTCDate()
+      : '';
+    const rendered = selected
+    ? <SelectedContainer onClick={() => dateHandlers(value)}><p>{parsedDate}</p></SelectedContainer>
+    : type === 'empty'
+    ? <EmptyContainer><p></p></EmptyContainer>
+    : type === 'normal'
+    ? <NormalContainer onClick={() => dateHandlers(value)}><p>{parsedDate}</p></NormalContainer>
+    : type === 'dow'
+    ? <DayOfWeekContainer><p>{value}</p></DayOfWeekContainer>
+    : <h1>ERR</h1>
+    return (
+      <>{rendered}</>
     );
   }
 }

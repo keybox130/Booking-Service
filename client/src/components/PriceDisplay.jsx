@@ -4,65 +4,53 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 10px; 
 `;
 
-const FlexRow = styled.div`
+const PriceRow = styled.div`
   display: flex;
-  flex-direction: row;
+  align-items: left;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
 `;
 
-const UnderlinedText = styled.p`
+const TotalRow = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  border-top: 0.5px solid #222323;
+`;
+
+const PriceDesc = styled.h3`
+  color: #222323;
   text-decoration: underline;
-  color: #2e2e2e;
-`;
-
-const LightText = styled.p`
-  color: #2e2e2e;
-`;
-
-const TotalContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  border-top: 0.4px solid rgba(0, 0, 0, 0.12);
-  font-size: 9px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-`;
-
-const DisclaimerText = styled.p`
-  color: #2e2e2e;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 20px; 
+  font-weight: 400;
   font-size: 14px;
 `;
 
+const Price = styled.h3`
+  font-size: inherit;
+`;
 
-const PriceDisplay = ({ data, active }) => {
-  if (!active) {
+
+
+class PriceDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state ={};
+  }
+
+  render() {
+    const { prices } = this.props;
     return (
       <Container>
-      <DisclaimerText>You wont be charged yet</DisclaimerText>
-      <FlexRow>
-        <UnderlinedText>$116 x 1 night</UnderlinedText>
-        <LightText>$116</LightText>
-      </FlexRow>
-      <FlexRow>
-        <UnderlinedText>Service fee</UnderlinedText>
-        <LightText>$43</LightText>
-      </FlexRow>
-      <TotalContainer>
-        <h1>Total</h1>
-        <h1>$159</h1>
-      </TotalContainer>
-    </Container>
-  );
+        <PriceRow><PriceDesc>Total Nightly Price</PriceDesc><Price>${prices.nightly}</Price></PriceRow>
+        <PriceRow><PriceDesc>Service Fee</PriceDesc><Price>${prices.serviceFee}</Price></PriceRow>
+        <PriceRow><PriceDesc>Guest Fee</PriceDesc><Price>${prices.additionalPerson}</Price></PriceRow>
+        <PriceRow><PriceDesc>Taxes</PriceDesc><Price>${prices.taxes}</Price></PriceRow>
+        <TotalRow><h3>Total</h3><Price>${prices.total}</Price></TotalRow>
+      </Container>
+    );
   }
-  return null;
-};
+}
 
 export default PriceDisplay;
