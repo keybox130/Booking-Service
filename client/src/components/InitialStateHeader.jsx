@@ -46,7 +46,6 @@ class InitialStateHeader extends React.Component {
 
   render() {
     const { room } = this.props;
-    console.log(room);
     const { base_nightly_price, ratings_count, ratings_sum } = room;
     const priceTitle = base_nightly_price 
       ? (<TextRow><PriceTitle>${base_nightly_price}</PriceTitle><NightText> / night</NightText></TextRow>)

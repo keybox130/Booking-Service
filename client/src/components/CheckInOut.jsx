@@ -46,7 +46,7 @@ class CheckInOut extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut } = this.props;
+    const { room, checkIn, checkOut, handleCalendar } = this.props;
     const checkInRender = checkIn
       ? (<FlexColBorder><SmallBoldTitle>CHECK-IN</SmallBoldTitle><SecondaryText value={checkIn}/></FlexColBorder>)
       : <h1>Loading...</h1>;
@@ -54,7 +54,7 @@ class CheckInOut extends React.Component {
       ? (<FlexCol><SmallBoldTitle>CHECKOUT</SmallBoldTitle><SecondaryText value={checkOut}/></FlexCol>)
       : <h1>Loading...</h1>;
     return ( 
-      <Container>
+      <Container onClick={() => handleCalendar()}>
         {checkInRender}
         {checkOutRender}
       </Container>

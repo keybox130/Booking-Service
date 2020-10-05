@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 // Components
 import CalendarTitle from './CalendarTitle.jsx';
+import MonthSlider from './MonthSilder.jsx';
+import AllMonths from './AllMonths.jsx';
+import CalendarClose from './CalendarClose.jsx';
 
 // Container
 const Container = styled.div`
@@ -25,14 +28,26 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut } = this.props;
+    const { room, checkIn, checkOut, calendarInputHandlers, renderData, dateHandlers, selectedDays, calendarDateRange, utc, handleCalendar } = this.props;
     const { min_days } = room;
     const calTitle = min_days
-      ? <CalendarTitle minDays={min_days} checkIn={checkIn} checkOut={checkOut} />
-      : <h1>Loading...</h1>
+      ? <CalendarTitle minDays={min_days} checkIn={checkIn} checkOut={checkOut} calendarInputHandlers={calendarInputHandlers} selectedDays={selectedDays} calendarDateRange={calendarDateRange}/>
+      : <h1>Loading...</h1>;
+    const sliderRender = room
+      ? <MonthSlider />
+      : <h1>Loading...</h1>;
+    const allMonthsRender = renderData
+      ? <AllMonths months={renderData} dateHandlers={dateHandlers} utc={utc}/>
+      : <h1>Loading...</h1>;
+    const closeRender = handleCalendar
+      ? <CalendarClose handleCalendar={handleCalendar} />
+      : <></>
     return (
       <Container>
         {calTitle}
+        {sliderRender}
+        {allMonthsRender}
+        {closeRender}
       </Container>
     );
   }

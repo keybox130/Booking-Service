@@ -74,7 +74,7 @@ const FormText = styled.input`
 class CalendarTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checkInSelected: true, checkOutSelected: false };
+    this.state = { checkInSelected: false, checkOutSelected: false };
     // Bindings
     this.handleClick = this.handleClick.bind(this);
   }
@@ -89,10 +89,10 @@ class CalendarTitle extends React.Component {
   }
 
   render() {
-    const { minDays, checkIn, checkOut } = this.props;
+    const { minDays, checkIn, checkOut, calendarInputHandlers, selectedDays, calendarDateRange } = this.props;
     const { checkInSelected } = this.state;
     const nightsRender = minDays
-      ? <TitleCol><NightTitle>Select dates</NightTitle><SecondaryText>Minimun stay: {minDays} nights</SecondaryText></TitleCol>
+      ? <TitleCol><NightTitle>{selectedDays !== null ? `${selectedDays} Nights` : 'Select dates'}</NightTitle><SecondaryText>{calendarDateRange !== null ? calendarDateRange : `Minimun stay: ${minDays} nights`}</SecondaryText></TitleCol>
       : <h1>Loading...</h1>;
     const checkInOutRender = checkInSelected
       ? (<CheckInOutContainer>
@@ -100,13 +100,13 @@ class CalendarTitle extends React.Component {
           <SmallBoldTitle>
             CHECK-IN
           </SmallBoldTitle>
-          <FormText value={checkIn}/>
+          <FormText value={checkIn} onChange={(e) => calendarInputHandlers.handleCheckIn(e)}/>
         </CheckInOutColSelected>
         <CheckInOutCol onClick={() => this.handleClick()}>
           <SmallBoldTitle>
             CHECKOUT
           </SmallBoldTitle>
-          <FormText value={checkOut}/>
+          <FormText value={checkOut} onChange={(e) => calendarInputHandlers.handleCheckOut(e)}/>
         </CheckInOutCol>
       </CheckInOutContainer>)
       : (<CheckInOutContainer>
@@ -114,13 +114,13 @@ class CalendarTitle extends React.Component {
           <SmallBoldTitle>
             CHECK-IN
           </SmallBoldTitle>
-          <FormText value={checkIn}/>
+          <FormText value={checkIn} onChange={(e) => calendarInputHandlers.handleCheckIn(e)}/>
         </CheckInOutCol>
         <CheckInOutColSelected onClick={() => this.handleClick()}>
           <SmallBoldTitle>
             CHECKOUT
           </SmallBoldTitle>
-          <FormText value={checkOut}/>
+          <FormText value={checkOut} onChange={(e) => calendarInputHandlers.handleCheckOut(e)}/>
         </CheckInOutColSelected>
       </CheckInOutContainer>)
     return (
