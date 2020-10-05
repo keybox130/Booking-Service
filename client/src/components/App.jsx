@@ -11,6 +11,22 @@ const Container = styled.div`
   width: 100%;
 `;
 
+Date.prototype.addDays = function(days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+}
+
+function getDates(startDate, stopDate) {
+  var dateArray = new Array();
+  var currentDate = startDate;
+  while (currentDate <= stopDate) {
+    dateArray.push(new Date(currentDate));
+    currentDate = currentDate.addDays(1);
+  }
+  return dateArray;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +69,8 @@ class App extends React.Component {
     this.getAccomodationFees = this.getAccomodationFees.bind(this);
     this.getTotalPrice = this.getTotalPrice.bind(this);
     this.handleCalendar = this.handleCalendar.bind(this);
+    this.clearDates = this.clearDates.bind(this);
+    this.updateUsedDates = this.updateUsedDates.bind(this);
   }
 
   getRoom() {
@@ -154,11 +172,60 @@ class App extends React.Component {
       }
       year.push(month);
     }
-    return year;
+    this.formatMonthTwoWeeks(year);
   }
 
-  formatMonthTwoWeeks() {
-    let monthArr = this.createMonths();
+  updateUsedDates() {
+    const { checkInUTC, checkOutUTC } = this.state;
+    const datesArr = getDates(checkInUTC, checkOutUTC);
+    const MONTHS = [9, 10];
+    const DAYS = [31, 30];
+    const EMPTY = [{start: 4, end: 0}, {start: 0, end: 5}];
+    let year = [];
+    for (let i = 0; i < MONTHS.length; i++) {
+      let monthKey = MONTHS[i];
+      let dayCount = DAYS[i];
+      let start = EMPTY[i].start;
+      let end = EMPTY[i].end;
+      let dayValue = 1;
+      let month = [];
+      for (let j = 0; j < 35; j++) {
+        let day = {};
+        if (start > 0) {
+          day.type = 'empty';
+          day.value = '';
+          start--;
+          month.push(day);
+        } else if (dayCount > 0) {
+          let utcKey = new Date(2020, monthKey, dayValue);
+          console.log(datesArr);
+          let filtered = datesArr.filter(item => item.getTime() === utcKey.getTime()); //Item is always the same. (start Date)
+          console.log(filtered);
+          if (filtered.length > 0) {
+            day.type = 'used';
+            day.value = utcKey;
+            dayCount--;
+            dayValue++
+            month.push(day);
+          } else {
+            day.type = 'normal';
+            day.value = new Date(2020, monthKey, dayValue);
+            dayCount--;
+            dayValue++;
+            month.push(day);
+          }
+        } else if (end > 0) {
+          day.type = 'empty';
+          day.value = '';
+          month.push(day);
+        }
+      }
+      year.push(month);
+    }
+    this.formatMonthTwoWeeks(year);
+  }
+
+  formatMonthTwoWeeks(monthArr) {
     let storage = [];
     for (let i = 0; i < monthArr.length; i++) {
       let days = monthArr[i];
@@ -168,7 +235,10 @@ class App extends React.Component {
       }
       storage.push(month);
     }
-    this.setState({renderData: storage});
+    this.setState({renderData: storage}, () => {
+      console.log('DATA TO RENDER')
+      console.log(this.state);
+    });
   }
 
   handleCheckIn(e) {
@@ -296,11 +366,13 @@ class App extends React.Component {
     this.setState({calendarDateRange: result}, () => console.log(this.state))
   }
 
-  
+  clearDates() {
+    this.setState({checkInUTC: '', checkOutUTC: '', dateRange: false});
+  }
 
   componentDidMount() {
     this.getRoom();
-    this.formatMonthTwoWeeks();
+    this.createMonths();
   }
 
   render() {
@@ -310,10 +382,10 @@ class App extends React.Component {
     const prices = {nightly: totalNightlyPrice, additionalPerson: additionalPerson, serviceFee: serviceFee, taxes: taxes, total: totalCost}
     const UTC = {checkIn: checkInUTC, checkOut: checkOutUTC}
     const base = roomData 
-      ? <InitialState room={roomData} checkIn={checkIn} checkOut={checkOut} guestTotal={guestTotal} guestModalActive={guestModalActive} adultCount={adultCount} childrenCount={childrenCount} infantCount={infantCount} guestModalHandlers={guestModalHandlers} guestModalToggle={this.handleGuestModal} dateRange={dateRange} prices={prices} handleCalendar={this.handleCalendar}/>
+      ? <InitialState room={roomData} checkIn={checkIn} checkOut={checkOut} guestTotal={guestTotal} guestModalActive={guestModalActive} adultCount={adultCount} childrenCount={childrenCount} infantCount={infantCount} guestModalHandlers={guestModalHandlers} guestModalToggle={this.handleGuestModal} dateRange={dateRange} prices={prices} handleCalendar={this.handleCalendar} handleButton={this.updateUsedDates} utc={UTC}/>
       : <h1>Loading...</h1>;
     const calendarRender = (roomData && calendarActive)
-      ? <Calendar room={roomData[0]} checkIn={checkIn} checkOut={checkOut} dateRange={dateRange} calendarInputHandlers={calendarInputHandlers} renderData={renderData} dateHandlers={this.handleUTCDates} selectedDays={selectedDays} calendarDateRange={calendarDateRange} utc={UTC} handleCalendar={this.handleCalendar} />
+      ? <Calendar room={roomData[0]} checkIn={checkIn} checkOut={checkOut} dateRange={dateRange} calendarInputHandlers={calendarInputHandlers} renderData={renderData} dateHandlers={this.handleUTCDates} selectedDays={selectedDays} calendarDateRange={calendarDateRange} utc={UTC} handleCalendar={this.handleCalendar} clearDates={this.clearDates}/>
       : <></>;
     return (
       <Container>

@@ -28,7 +28,7 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut, calendarInputHandlers, renderData, dateHandlers, selectedDays, calendarDateRange, utc, handleCalendar } = this.props;
+    const { room, checkIn, checkOut, calendarInputHandlers, renderData, dateHandlers, selectedDays, calendarDateRange, utc, handleCalendar, clearDates } = this.props;
     const { min_days } = room;
     const calTitle = min_days
       ? <CalendarTitle minDays={min_days} checkIn={checkIn} checkOut={checkOut} calendarInputHandlers={calendarInputHandlers} selectedDays={selectedDays} calendarDateRange={calendarDateRange}/>
@@ -40,7 +40,7 @@ class Calendar extends React.Component {
       ? <AllMonths months={renderData} dateHandlers={dateHandlers} utc={utc}/>
       : <h1>Loading...</h1>;
     const closeRender = handleCalendar
-      ? <CalendarClose handleCalendar={handleCalendar} />
+      ? <CalendarClose handleCalendar={handleCalendar} clearDates={clearDates} />
       : <></>
     return (
       <Container>

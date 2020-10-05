@@ -22,13 +22,17 @@ class Button extends React.Component {
   }
 
   render() {
-    const { active } = this.props;
+    const { active, handleButton, utc } = this.props;
     const text = !active
       ? 'Check availability'
       : 'Reserve';
     return (
       <div>
-        <Container>
+        <Container onClick={() => {
+          if (utc.checkIn.toString().length > 1 && utc.checkOut.toString().length > 1) {
+            handleButton(utc.checkIn, utc.checkOut);
+          }
+        }}>
           {text}
         </Container>
       </div>

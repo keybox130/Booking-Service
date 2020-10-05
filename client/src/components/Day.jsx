@@ -115,6 +115,8 @@ class Day extends React.Component {
     ? <NormalContainer onClick={() => dateHandlers(value)}><p>{parsedDate}</p></NormalContainer>
     : type === 'dow'
     ? <DayOfWeekContainer><p>{value}</p></DayOfWeekContainer>
+    : type === 'used'
+    ? <UsedContainer><p>{parsedDate}</p></UsedContainer>
     : <h1>ERR</h1>
     return (
       <>{rendered}</>

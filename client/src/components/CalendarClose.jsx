@@ -16,6 +16,11 @@ const CloseBtn = styled.div`
   text-align: center;
 `;
 
+const ClearDate = styled.div`
+  text-decoration: underline;
+  font-size: 12px;
+`;
+
 class CalendarClose extends React.Component {
   constructor(props) {
     super(props);
@@ -23,9 +28,10 @@ class CalendarClose extends React.Component {
   }
 
   render() {
-    const { handleCalendar } = this.props;
+    const { handleCalendar, clearDates } = this.props;
     return (
       <Container>
+        <ClearDate onClick={() => clearDates()}>Clear Dates</ClearDate>
         <CloseBtn onClick={() => handleCalendar()}>Close</CloseBtn>
       </Container>
     );

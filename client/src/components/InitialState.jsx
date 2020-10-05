@@ -24,7 +24,7 @@ class InitialState extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut, guestTotal, guestModalActive, adultCount, childrenCount, infantCount, guestModalHandlers, guestModalToggle, dateRange, prices, handleCalendar } = this.props;
+    const { room, checkIn, checkOut, guestTotal, guestModalActive, adultCount, childrenCount, infantCount, guestModalHandlers, guestModalToggle, dateRange, prices, handleCalendar, handleButton, utc } = this.props;
     const { max_guests } = room[0];
     console.log(room);
     const header = room
@@ -37,7 +37,7 @@ class InitialState extends React.Component {
       ? <GuestModal active={guestModalActive} guestTotal={guestTotal} childrenCount={childrenCount} adultCount={adultCount} infantCount={infantCount} maxGuests={max_guests} handlers={guestModalHandlers} closeMe={guestModalToggle}/>
       : <div></div>;
     const buttonRender = dateRange !== undefined
-      ? <Button active={dateRange} />
+      ? <Button active={dateRange} handleButton={handleButton} utc={utc} />
       : <button>Loading...</button>;
     const priceDisplayRender = dateRange
       ? <PriceDisplay prices={prices} />
