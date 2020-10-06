@@ -71,6 +71,7 @@ class App extends React.Component {
     this.handleCalendar = this.handleCalendar.bind(this);
     this.clearDates = this.clearDates.bind(this);
     this.updateUsedDates = this.updateUsedDates.bind(this);
+    this.updateChainedDates = this.updateChainedDates.bind(this);
   }
 
   getRoom() {
@@ -223,6 +224,71 @@ class App extends React.Component {
       year.push(month);
     }
     this.formatMonthTwoWeeks(year);
+    this.setState({dateRange: false});
+  }
+
+  updateChainedDates() {
+    const { checkInUTC, checkOutUTC } = this.state;
+    const datesArr = getDates(checkInUTC, checkOutUTC);
+    const MONTHS = [9, 10];
+    const DAYS = [31, 30];
+    const EMPTY = [{start: 4, end: 0}, {start: 0, end: 5}];
+    let year = [];
+    for (let i = 0; i < MONTHS.length; i++) {
+      let monthKey = MONTHS[i];
+      let dayCount = DAYS[i];
+      let start = EMPTY[i].start;
+      let end = EMPTY[i].end;
+      let dayValue = 1;
+      let month = [];
+      for (let j = 0; j < 35; j++) {
+        let day = {};
+        if (start > 0) {
+          day.type = 'empty';
+          day.value = '';
+          start--;
+          month.push(day);
+        } else if (dayCount > 0) {
+          let utcKey = new Date(2020, monthKey, dayValue);
+          console.log(datesArr);
+          let filtered = datesArr.filter(item => item.getTime() === utcKey.getTime()); //Item is always the same. (start Date)
+          console.log(filtered);
+          if (filtered.length > 0) {
+            if (utcKey.getTime() === checkInUTC.getTime()) {
+              day.type = 'selected';
+              day.value = utcKey;
+              dayCount--;
+              dayValue++;
+              month.push(day);
+            } else if (utcKey.getTime() === checkOutUTC.getTime()) {
+              day.type = 'selected';
+              day.value = utcKey;
+              dayCount--;
+              dayValue++;
+              month.push(day);
+            } else {
+              day.type = 'chain';
+            day.value = utcKey;
+            dayCount--;
+            dayValue++
+            month.push(day);
+            }
+          } else {
+            day.type = 'normal';
+            day.value = new Date(2020, monthKey, dayValue);
+            dayCount--;
+            dayValue++;
+            month.push(day);
+          }
+        } else if (end > 0) {
+          day.type = 'empty';
+          day.value = '';
+          month.push(day);
+        }
+      }
+      year.push(month);
+    }
+    this.formatMonthTwoWeeks(year);
   }
 
   formatMonthTwoWeeks(monthArr) {
@@ -352,7 +418,7 @@ class App extends React.Component {
     if (checkInUTC.toString().length < 1) {
       this.setState({checkInUTC: date, dateRange: false});
     } else if (checkInUTC.toString().length > 1 && checkOutUTC.toString().length < 1) {
-      this.setState({checkOutUTC: date, dateRange: true}, () => {self.getDateRange(); self.formatUTCDateRange();});
+      this.setState({checkOutUTC: date, dateRange: true}, () => {self.getDateRange(); self.formatUTCDateRange(); self.updateChainedDates()});
     } else if (checkInUTC.toString().length > 1 && checkOutUTC.toString().length > 1) {
       this.setState({checkInUTC: date, checkOutUTC: '', dateRange: false});
     }

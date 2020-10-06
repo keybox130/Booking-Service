@@ -117,7 +117,11 @@ class Day extends React.Component {
     ? <DayOfWeekContainer><p>{value}</p></DayOfWeekContainer>
     : type === 'used'
     ? <UsedContainer><p>{parsedDate}</p></UsedContainer>
-    : <h1>ERR</h1>
+    : type === 'selected'
+    ? <SelectedContainer><p>{parsedDate}</p></SelectedContainer>
+    : type === 'chain'
+    ? <ChainContainer><p>{parsedDate}</p></ChainContainer>
+    : <h1>Err</h1>
     return (
       <>{rendered}</>
     );
