@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 14px;
 `;
 
 const FlexCol = styled.div`
@@ -36,7 +36,7 @@ const SmallParaText = styled.p`
 class Guest extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { open: false};
+    this.state = { open: false };
     this.handleOpen = this.handleOpen.bind(this);
   }
 
@@ -55,7 +55,7 @@ class Guest extends React.Component {
     const guestCountRender = guestTotal
       ? <FlexCol><SmallBoldTitle>GUESTS</SmallBoldTitle><SmallParaText>{guestTotal} guests</SmallParaText></FlexCol>
       : <h1>Loading...</h1>;
-    const arrowRender = open
+    const arrowRender = active
       ? <Arrow src="https://keybox.s3-us-west-1.amazonaws.com/upArrow.png" />
       : <Arrow src="https://keybox.s3-us-west-1.amazonaws.com/downArrow.png" />;
     return (

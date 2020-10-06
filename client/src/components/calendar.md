@@ -1,16 +1,6 @@
-### Calendar ###
 
-### STEP 1 ~ MVP ###
-
-# 1 - Render Out Components
-~~~ Make the calendar title
-  ~~~ Has to have a checkin/out section that represents in the state
-  ~~~ Has to have a title that renders the # of selected days
-  ~~~ Has to have atleast 3 months, where they move upon clicking the arrows
-~~~ Make the actual calendar
-  ~~~ Render out 3 months
-  ~~~ On click update selected days
-  ~~~ When both selected days are selected. changes state to render out info.
-
-### STEP 2 ~ Styling + Selected days ###
-
+- fix clearDates button (doesnt work when clearing selected days if some are already selected);
+- - - - - - 
+# PROBLEMS
+- So when there are marked out dates, if you select new dates it causes the re-render algo to run. So do get over this we could maybe write a conditional or switch bool to track it, and grab the already selected days maybe in state ? 
+(have to add to selected algo to account for those dates if they exist and then have an additional else if clause to make those days unselected...)

@@ -8,10 +8,12 @@ const Modal = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px !important;
   padding: 16px !important;
   text-align: left !important;
-  width: 100% !important;
   z-index: 999 !important;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 190px;
+  right: 0px;
 `;
 
 // Containers
@@ -26,7 +28,6 @@ const FlexRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  min-width: 220px;
   margin-bottom: 15px;
   margin-top: 15px;
 `;
@@ -68,7 +69,7 @@ const Close = styled.h4`
 const WarningText = styled.p`
   font-weight: normal;
   color: #828282;
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 15px;
   margin-bottom: 15px;
 `;

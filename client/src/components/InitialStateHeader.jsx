@@ -7,6 +7,7 @@ const FlexRow = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 25px;
 `;
 
 const TextRow = styled.div`
@@ -18,21 +19,23 @@ const TextRow = styled.div`
 // Font styling
 const PriceTitle = styled.h3`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 20px;
+  margin-right: 5px;
 `;
 
 const NightText = styled.p`
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const RatingBold = styled.p`
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: 450;
+  font-size: 14px;
+  margin-right: 5px;
 `;
 
 const RatingCount = styled.p`
-  font-weight: 400;
+  font-weight: 450;
   font-size: 12px;
   color: #979797;
 `;
@@ -48,7 +51,7 @@ class InitialStateHeader extends React.Component {
     const { room } = this.props;
     const { base_nightly_price, ratings_count, ratings_sum } = room;
     const priceTitle = base_nightly_price 
-      ? (<TextRow><PriceTitle>${base_nightly_price}</PriceTitle><NightText> / night</NightText></TextRow>)
+      ? (<TextRow><PriceTitle>${base_nightly_price}</PriceTitle><NightText>{'  /  night'}</NightText></TextRow>)
       : (<h1>Loading...</h1>);
     const ratingsTitle = ratings_count 
       ? (<TextRow><img src="https://keybox.s3-us-west-1.amazonaws.com/star.png" /><RatingBold>{ratings_sum}</RatingBold><RatingCount>({ratings_count})</RatingCount></TextRow>)

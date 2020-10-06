@@ -84,7 +84,8 @@ const DayOfWeekContainer = styled.div`
   justify-content: center;
   width: 15px;
   height: 15px;
-  color: #CCCCCC;
+  font-size: 12px;
+  margin-top: 15px;
 `;
 
 class Day extends React.Component {
@@ -115,7 +116,13 @@ class Day extends React.Component {
     ? <NormalContainer onClick={() => dateHandlers(value)}><p>{parsedDate}</p></NormalContainer>
     : type === 'dow'
     ? <DayOfWeekContainer><p>{value}</p></DayOfWeekContainer>
-    : <h1>ERR</h1>
+    : type === 'used'
+    ? <UsedContainer><p>{parsedDate}</p></UsedContainer>
+    : type === 'selected'
+    ? <SelectedContainer><p>{parsedDate}</p></SelectedContainer>
+    : type === 'chain'
+    ? <ChainContainer><p>{parsedDate}</p></ChainContainer>
+    : <h1>Err</h1>
     return (
       <>{rendered}</>
     );
