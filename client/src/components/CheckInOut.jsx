@@ -14,7 +14,7 @@ const FlexCol = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  padding: 10px;
+  padding: 14px 10px 14px 13px;
 `;
 
 const FlexColBorder = styled.div`
@@ -22,15 +22,15 @@ const FlexColBorder = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  padding: 10px;
+  padding: 14px 7px 14px 10px;
   border-right: 0.5px solid rgb(176, 176, 176);
 `;
 
 // Font style
 
 const SmallBoldTitle = styled.h3`
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: 550;
+  font-size: 10px;
 `;
 
 const SecondaryText = styled.input`

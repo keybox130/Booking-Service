@@ -15,6 +15,7 @@ const Container = styled.div`
   border-radius: 12px;
   padding: 24px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  max-width: 330px;
 `;
 
 class InitialState extends React.Component {

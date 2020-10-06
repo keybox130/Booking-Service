@@ -50,13 +50,13 @@ const CheckInOutColSelected = styled.div`
 // Font Info
 const NightTitle = styled.h3`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 22px;
   margin-bottom: 15px;
 `;
 
 const SecondaryText = styled.p`
   color: #A7A7A7;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
 `;
 

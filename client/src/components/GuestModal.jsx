@@ -68,7 +68,7 @@ const Close = styled.h4`
 const WarningText = styled.p`
   font-weight: normal;
   color: #828282;
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 15px;
   margin-bottom: 15px;
 `;

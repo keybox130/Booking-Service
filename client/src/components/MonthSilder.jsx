@@ -7,6 +7,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  margin-top: 35px;
 `;
 
 const LeftArrow = styled.div`
@@ -23,21 +24,25 @@ const RightArrow = styled.div`
 
 const LeftMonth = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-right: 140px;
 `;
 
 const RightMonth = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: right;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-left: 140px;
 `;
 
 // Fonts
 
 const MonthTitle = styled.h3`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 class MonthSlider extends React.Component {

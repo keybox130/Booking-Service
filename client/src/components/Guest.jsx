@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 14px;
 `;
 
 const FlexCol = styled.div`
@@ -36,7 +36,7 @@ const SmallParaText = styled.p`
 class Guest extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { open: false};
+    this.state = { open: false };
     this.handleOpen = this.handleOpen.bind(this);
   }
 

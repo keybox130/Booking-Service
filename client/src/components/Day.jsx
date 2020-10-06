@@ -84,7 +84,8 @@ const DayOfWeekContainer = styled.div`
   justify-content: center;
   width: 15px;
   height: 15px;
-  color: #CCCCCC;
+  font-size: 12px;
+  margin-top: 15px;
 `;
 
 class Day extends React.Component {
