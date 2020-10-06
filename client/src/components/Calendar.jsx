@@ -34,7 +34,7 @@ class Calendar extends React.Component {
       ? <CalendarTitle minDays={min_days} checkIn={checkIn} checkOut={checkOut} calendarInputHandlers={calendarInputHandlers} selectedDays={selectedDays} calendarDateRange={calendarDateRange}/>
       : <h1>Loading...</h1>;
     const sliderRender = room
-      ? <MonthSlider />
+      ? <MonthSlider monthSlides={monthSlides} />
       : <h1>Loading...</h1>;
     const allMonthsRender = renderData
       ? <AllMonths months={renderData} dateHandlers={dateHandlers} utc={utc}/>

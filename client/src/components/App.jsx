@@ -272,7 +272,7 @@ class App extends React.Component {
       year.push(month);
     }
     this.formatMonthTwoWeeks(year);
-    this.setState({dateRange: false, usedDates: true}, () => this.clearDates());
+    this.setState({dateRange: false, usedDates: true, guestTotal: 1, adultCount: 1, childrenCount: 0, infantCount: 0}, () => this.clearDates());
   }
 
   updateChainedDates() {
@@ -369,8 +369,8 @@ class App extends React.Component {
   }
 
   changeTotalGuest() {
-    const { adultCount, childrenCount, infantCount } = this.state;
-    const total = adultCount + childrenCount + infantCount;
+    const { adultCount, childrenCount } = this.state;
+    const total = adultCount + childrenCount;
     this.setState({ guestTotal: total });
   }
 
@@ -378,7 +378,7 @@ class App extends React.Component {
     const { checkInUTC } = this.state;
     // Wed, 14 Jun 2017 07:00:00 GM
     let stringArr = checkInUTC.toUTCString().split(' ');
-    const string = `${stringArr[2]} ${stringArr[2]}, ${stringArr[3]}`;
+    const string = `${stringArr[2]} ${stringArr[1]}, ${stringArr[3]}`;
     this.setState({checkIn: string});
   }
 
@@ -386,7 +386,7 @@ class App extends React.Component {
     const { checkOutUTC } = this.state;
     // Wed, 14 Jun 2017 07:00:00 GM
     let stringArr = checkOutUTC.toUTCString().split(' ');
-    const string = `${stringArr[2]} ${stringArr[2]}, ${stringArr[3]}`;
+    const string = `${stringArr[2]} ${stringArr[1]}, ${stringArr[3]}`;
     this.setState({checkOut: string});
   }
 
