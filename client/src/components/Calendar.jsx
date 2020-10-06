@@ -14,8 +14,8 @@ const Container = styled.div`
   display: inline-block !important;
   padding: 24px 32px 16px !important;
   position: absolute !important;
-  top: 24px !important;
-  right: 32px !important;
+  top: 60px !important;
+  right: 0px !important;
   width: 661px !important;
   z-index: 99 !important;
   min-height: 460px !important;
@@ -28,7 +28,7 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut, calendarInputHandlers, renderData, dateHandlers, selectedDays, calendarDateRange, utc, handleCalendar, clearDates } = this.props;
+    const { room, checkIn, checkOut, calendarInputHandlers, renderData, dateHandlers, selectedDays, calendarDateRange, utc, handleCalendar, clearDates, monthSlides } = this.props;
     const { min_days } = room;
     const calTitle = min_days
       ? <CalendarTitle minDays={min_days} checkIn={checkIn} checkOut={checkOut} calendarInputHandlers={calendarInputHandlers} selectedDays={selectedDays} calendarDateRange={calendarDateRange}/>

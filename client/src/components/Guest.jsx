@@ -55,7 +55,7 @@ class Guest extends React.Component {
     const guestCountRender = guestTotal
       ? <FlexCol><SmallBoldTitle>GUESTS</SmallBoldTitle><SmallParaText>{guestTotal} guests</SmallParaText></FlexCol>
       : <h1>Loading...</h1>;
-    const arrowRender = open
+    const arrowRender = active
       ? <Arrow src="https://keybox.s3-us-west-1.amazonaws.com/upArrow.png" />
       : <Arrow src="https://keybox.s3-us-west-1.amazonaws.com/downArrow.png" />;
     return (

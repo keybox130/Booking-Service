@@ -16,6 +16,7 @@ const Container = styled.div`
   padding: 24px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   max-width: 330px;
+  min-width: 330px;
 `;
 
 class InitialState extends React.Component {
@@ -25,18 +26,15 @@ class InitialState extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut, guestTotal, guestModalActive, adultCount, childrenCount, infantCount, guestModalHandlers, guestModalToggle, dateRange, prices, handleCalendar, handleButton, utc } = this.props;
+    const { room, checkIn, checkOut, guestTotal, adultCount, childrenCount, infantCount, guestModalHandlers, guestModalToggle, dateRange, prices, handleCalendar, handleButton, utc, guestModalActive } = this.props;
     const { max_guests } = room[0];
     console.log(room);
     const header = room
       ? <InitialStateHeader room={room[0]} />
       : <h1>Loading...</h1>;
     const checkInOut = checkIn
-      ? <InitialStateCheckInOut room={room[0]} checkIn={checkIn} checkOut={checkOut} guestTotal={guestTotal} toggle={guestModalToggle} handleCalendar={handleCalendar} />
+      ? <InitialStateCheckInOut room={room[0]} checkIn={checkIn} checkOut={checkOut} guestTotal={guestTotal} toggle={guestModalToggle} handleCalendar={handleCalendar} guestModalActive={guestModalActive}/>
       : <h1>Loading...</h1>;
-    const guestModalRender = guestModalActive
-      ? <GuestModal active={guestModalActive} guestTotal={guestTotal} childrenCount={childrenCount} adultCount={adultCount} infantCount={infantCount} maxGuests={max_guests} handlers={guestModalHandlers} closeMe={guestModalToggle}/>
-      : <div></div>;
     const buttonRender = dateRange !== undefined
       ? <Button active={dateRange} handleButton={handleButton} utc={utc} />
       : <button>Loading...</button>;
@@ -47,7 +45,6 @@ class InitialState extends React.Component {
       <Container>
         {header}
         {checkInOut}
-        {guestModalRender}
         {buttonRender}
         {priceDisplayRender}
       </Container>

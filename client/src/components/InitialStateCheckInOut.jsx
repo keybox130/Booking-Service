@@ -19,14 +19,14 @@ class InitialStateCheckInOut extends React.Component {
   }
 
   render() {
-    const { room, checkIn, checkOut, guestTotal, toggle, handleCalendar } = this.props;
+    const { room, checkIn, checkOut, guestTotal, toggle, handleCalendar, guestModalActive } = this.props;
     const { max_guests } = room;
     const { active } = this.state;
     const checkInOutRender = checkIn !== undefined
       ? <CheckInOut checkIn={checkIn} checkOut={checkOut} room={room} handleCalendar={handleCalendar}/>
       : <h1>Loading...</h1>;
     const guestRender = max_guests
-      ? <Guest toggle={toggle} guestCount={max_guests} guestTotal={guestTotal} active={active} />
+      ? <Guest toggle={toggle} guestCount={max_guests} guestTotal={guestTotal} active={guestModalActive} />
       : <h1>Loading...</h1>;
     return (
       <Container>
