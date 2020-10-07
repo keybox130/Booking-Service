@@ -39,12 +39,15 @@ class AllMonths extends React.Component {
   }
 
   render() {
-    const { months, dateHandlers, utc } = this.props;
-    const month1 = months[0]
-      ? <MonthContainerRight><DaysOfWeek />{months[0].map(week => <Week>{week.map(day => <Day type={day.type} value={day.value} dateHandlers={dateHandlers} utc={utc}/>)}</Week>)}</MonthContainerRight>
+    const { months, dateHandlers, utc, monthSlides } = this.props;
+    const { one, two, three } = monthSlides;
+    let indexOne = one - 1;
+    let indexTwo = two - 1;
+    const month1 = months[indexOne]
+      ? <MonthContainerRight><DaysOfWeek />{months[indexOne].map(week => <Week>{week.map(day => <Day type={day.type} value={day.value} dateHandlers={dateHandlers} utc={utc}/>)}</Week>)}</MonthContainerRight>
       : <h1>Loading...</h1>;
-    const month2 = months[1]
-      ? <MonthContainerLeft><DaysOfWeek />{months[1].map(week => <Week>{week.map(day => <Day type={day.type} value={day.value} dateHandlers={dateHandlers} utc={utc}/>)}</Week>)}</MonthContainerLeft>
+    const month2 = months[indexTwo]
+      ? <MonthContainerLeft><DaysOfWeek />{months[indexTwo].map(week => <Week>{week.map(day => <Day type={day.type} value={day.value} dateHandlers={dateHandlers} utc={utc}/>)}</Week>)}</MonthContainerLeft>
       : <h1>Loading...</h1>;
     return (
       <Container>
