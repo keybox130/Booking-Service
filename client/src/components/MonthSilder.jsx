@@ -52,21 +52,24 @@ class MonthSlider extends React.Component {
   }
 
   render() {
+    const { monthSlides } = this.props;
+    const { one, two, three, handler} = monthSlides;
+    const monthNames = [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return (
       <Container>
-        <LeftArrow>
+        <LeftArrow onClick={() => handler(false, true)}>
           <img src="https://keybox.s3-us-west-1.amazonaws.com/inactiveLeftArrow.png" />
         </LeftArrow>
 
         <LeftMonth>
-          <MonthTitle>Month 2020</MonthTitle>
+          <MonthTitle>{monthNames[one]} 2020</MonthTitle>
         </LeftMonth>
 
         <RightMonth>
-          <MonthTitle>Month 2020</MonthTitle>
+          <MonthTitle>{monthNames[two]} 2020</MonthTitle>
         </RightMonth>
 
-        <RightArrow>
+        <RightArrow onClick={() => handler(true, false)}>
           <img src="https://keybox.s3-us-west-1.amazonaws.com/activeRightArrow.png" />
         </RightArrow>
       </Container>

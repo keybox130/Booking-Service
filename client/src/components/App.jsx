@@ -105,46 +105,27 @@ class App extends React.Component {
     }
   }
 
-  handleDateSliderMonths() {
+  handleDateSliderMonths(add, subtract) {
     const { monthOne, monthTwo, monthThree, roomData } = this.state; //Max 11 (0 indexed)
     let room = roomData[0];
     const { starting_date } = room;
     let strArr = starting_date.split('-').slice(1,2).join('');
     const num = parseInt(strArr);
-    if (monthOne === '') { // 10 11 12
-      let one = num
-      let two = (num + 1) <= 12 
-        ? num + 1 
-        : 1;
-      let three = (num + 2) <= 12
-        ? num + 2
-        : (num + 2) === 13
-        ?  1
-        : (num + 2) === 14
-        ? 2
-        : null;
-      this.setState({monthOne: num, monthTwo: two, monthThree: three}, () => console.log(this.state));
-    } else {
-      let one = monthOne + 1 <= 12
-        ? monthOne + 1
-        : 1
-      let two = monthTwo + 2 <= 12 //two = 12 or two = 11 // 11 +2 13(1) //12 + 2 14 (2)
-        ? monthTwo + 2
-        : monthTwo + 2 === 13
-        ? 1
-        : monthTwo + 2 === 14
-        ? 2
-        : null;
-      let three = monthThree + 3 <= 12 // 12 - 3 (9) 10/11/12
-        ? monthThree + 3
-        : monthThree + 3 ===  13
-        ? 1
-        : monthThree + 3 === 14
-        ? 2
-        : monthThree + 3 === 15
-        ? 3
-        : null;
+    if (monthOne === '') { //Init
+      const one = num;
+      const two = one + 1 < 13 ? one + 1 : one + 1 === 13 ? 1 : null;
+      const three = one + 2 < 13 ? one + 2 : one + 2 === 13 ? 1 : one + 2 === 14 ? 2 : null;
       this.setState({monthOne: one, monthTwo: two, monthThree: three}, () => console.log(this.state));
+    } else if (add === true) { 
+      const one = monthOne + 1 < 13 ? monthOne + 1 : monthOne + 1 === 13 ? 1 : null;
+      const two = monthOne + 2 < 13 ? monthOne + 2 : monthOne + 2 === 13 ? 1 : monthOne + 2 === 14 ? 2 : null;
+      const three = monthOne + 3 < 13 ? monthOne + 3 : monthOne + 3 === 13 ? 1 : monthOne + 3 === 14 ? 2 : monthOne + 3 === 15 ? 3 : null;
+      this.setState({monthOne: one, monthTwo: two, monthThree: three}, () => console.log(this.state));
+    } else if (subtract === true) { // 11, 12, 1 --> one(10), two(11), three(12)
+      const one = monthOne - 1 >= 1 ? monthOne - 1 : monthOne === 1 ? 12 : null;
+      const two = monthTwo - 1 >= 1 ? monthTwo - 1 : monthTwo === 1 ? 12 : null;
+      const three = monthThree - 1 >= 1 ? monthThree - 1 : monthThree === 1 ? 12 : null;
+      this.setState({monthOne: one, monthTwo: two, monthThree: three}, () => console.log(this.state)); 
     }
   }
 
@@ -191,9 +172,9 @@ class App extends React.Component {
   }
 
   createMonths() {
-    const MONTHS = [9, 10];
-    const DAYS = [31, 30];
-    const EMPTY = [{start: 4, end: 0}, {start: 0, end: 5}];
+    const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const EMPTY = [{start: 4, end: 0}, {start: 1, end: 6}, {start: 1, end: 3}, {start: 4, end: 1}, {start: 4, end: 0}, {start: 2, end: 3}, {start: 4, end: 0}, {start: 0, end: 4}, {start: 3, end: 2},  {start: 4, end: 0},  {start: 1, end: 4},  {start: 3, end: 1}];
     let year = [];
     for (let i = 0; i < MONTHS.length; i++) {
       let monthKey = MONTHS[i];
@@ -229,9 +210,9 @@ class App extends React.Component {
   updateUsedDates() {
     const { checkInUTC, checkOutUTC } = this.state;
     const datesArr = getDates(checkInUTC, checkOutUTC);
-    const MONTHS = [9, 10];
-    const DAYS = [31, 30];
-    const EMPTY = [{start: 4, end: 0}, {start: 0, end: 5}];
+    const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const EMPTY = [{start: 4, end: 0}, {start: 1, end: 6}, {start: 1, end: 3}, {start: 4, end: 1}, {start: 4, end: 0}, {start: 2, end: 3}, {start: 4, end: 0}, {start: 0, end: 4}, {start: 3, end: 2},  {start: 4, end: 0},  {start: 1, end: 4},  {start: 3, end: 1}];
     let year = [];
     for (let i = 0; i < MONTHS.length; i++) {
       let monthKey = MONTHS[i];
@@ -278,9 +259,9 @@ class App extends React.Component {
   updateChainedDates() {
     const { checkInUTC, checkOutUTC } = this.state;
     const datesArr = getDates(checkInUTC, checkOutUTC);
-    const MONTHS = [9, 10];
-    const DAYS = [31, 30];
-    const EMPTY = [{start: 4, end: 0}, {start: 0, end: 5}];
+    const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const EMPTY = [{start: 4, end: 0}, {start: 1, end: 6}, {start: 1, end: 3}, {start: 4, end: 1}, {start: 4, end: 0}, {start: 2, end: 3}, {start: 4, end: 0}, {start: 0, end: 4}, {start: 3, end: 2},  {start: 4, end: 0},  {start: 1, end: 4},  {start: 3, end: 1}];
     let year = [];
     for (let i = 0; i < MONTHS.length; i++) {
       let monthKey = MONTHS[i];
@@ -501,7 +482,7 @@ class App extends React.Component {
   clearDates() {
     const self = this;
     const { usedDates } = this.state;
-    this.setState({checkInUTC: '', checkOutUTC: '', dateRange: false, checkIn: 'Add date', checkOut: 'Add date'}, () => {
+    this.setState({checkInUTC: '', checkOutUTC: '', dateRange: false, checkIn: 'Add date', checkOut: 'Add date', calendarDateRange: null, selectedDays: null}, () => {
       if (!usedDates) {
         this.createMonths()
       }
@@ -531,10 +512,10 @@ class App extends React.Component {
       ? <InitialState room={roomData} checkIn={checkIn} checkOut={checkOut} guestTotal={guestTotal} guestModalActive={guestModalActive} adultCount={adultCount} childrenCount={childrenCount} infantCount={infantCount} guestModalHandlers={guestModalHandlers} guestModalToggle={this.handleGuestModal} dateRange={dateRange} prices={prices} handleCalendar={this.handleCalendar} handleButton={this.updateUsedDates} utc={UTC}/>
       : <h1>Loading...</h1>;
     const calendarRender = (roomData && calendarActive)
-      ? <Calendar room={roomData[0]} checkIn={checkIn} checkOut={checkOut} dateRange={dateRange} calendarInputHandlers={calendarInputHandlers} renderData={renderData} dateHandlers={this.handleUTCDates} selectedDays={selectedDays} calendarDateRange={calendarDateRange} utc={UTC} handleCalendar={this.handleCalendar} clearDates={this.clearDates} monthSlides={monthSlides}/>
+      ? <Calendar room={roomData[0]} checkIn={checkIn} checkOut={checkOut} dateRange={dateRange} calendarInputHandlers={calendarInputHandlers} renderData={renderData} dateHandlers={this.handleUTCDates} selectedDays={selectedDays} calendarDateRange={calendarDateRange} utc={UTC} handleCalendar={this.handleCalendar} clearDates={this.clearDates} monthSlides={monthSlides} />
       : <></>;
       const guestModalRender = guestModalActive
-      ? <GuestModal active={guestModalActive} guestTotal={guestTotal} childrenCount={childrenCount} adultCount={adultCount} infantCount={infantCount} maxGuests={maxGuests} handlers={guestModalHandlers} closeMe={this.handleGuestModal}/>
+      ? <GuestModal active={guestModalActive} guestTotal={guestTotal} childrenCount={childrenCount} adultCount={adultCount} infantCount={infantCount} maxGuests={maxGuests} handlers={guestModalHandlers} closeMe={this.handleGuestModal} />
       : <div></div>;
     return (
       <Container>
