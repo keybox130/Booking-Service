@@ -1,23 +1,45 @@
-const path = require('path');
-const express = require('express');
-const db = require('../database');
+const mongoose = require('mongoose');
+const seed = require('./seed.js');
 
-const port = 3000;
-const app = express();
+mongoose.connect('mongodb://172.17.0.2:27017/bookings', { useNewUrlParser: true });
 
-app.use('/', express.static(path.join(__dirname, '../client/dist')));
+const db = mongoose.connection;
 
-app.get('/stays/:stayId', (req, res) => {
-  const data = req.params.stayId;
-  db.getRoomData(data, (err, results) => {
-    if (err) {
-      console.log(`Err @ [ app.get ] ::: ${err}`);
-      res.status(400).send(err);
-    } else {
-      console.log('Get Successful');
-      res.status(200).send(results);
-    }
-  });
+db.on('error', console.error.bind(console, 'Connection Err'));
+db.once('open', () => seed.seed());
+
+const schema = mongoose.Schema({
+  room_id: String,
+  ratings_count: String,
+  ratings_sum: String,
+  max_guests: String,
+  min_days: String,
+  service_fee: String,
+  base_nightly_price: String,
+  starting_date: Date,
+  weekly_discount: Object,
+  monthly_discount: Object,
+  already_booked: [],
+  taxes_fees: String,
+  additional_person_tax: String,
 });
 
-app.listen(port, () => console.log(`Listening @ http://localhost:${port}`));
+const Room = mongoose.model('Room', schema);
+
+const getRoomData = (data, callback) => {
+  const obj = { room_id: data };
+  Room.find(obj, (err, docs) => {
+    if (err) {
+      console.log(`Err @ [ getRoomData ] ::: ${err}`);
+      callback(err);
+    } else {
+      console.log('Fetch @ [ getRoomData ] Sucessfull');
+      callback(err, docs);
+    }
+  });
+};
+
+module.exports.getRoomData = getRoomData;
+module.exports.Room = Room;
+// Run the script.
+// seed();
