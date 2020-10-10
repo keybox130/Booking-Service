@@ -26,6 +26,8 @@ const Arrow = styled.img`
 const SmallBoldTitle = styled.h3`
   font-weight: bold;
   font-size: 12px;
+  margin: 0;
+  padding: 0;
 `;
 
 const SmallParaText = styled.p`

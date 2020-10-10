@@ -69,6 +69,8 @@ const FormText = styled.input`
   border: transparent;
   color: #787878;
   background-color: transparent;
+  margin: 0;
+  padding: 0;
 `;
 
 class CalendarTitle extends React.Component {
