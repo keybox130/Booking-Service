@@ -25,6 +25,7 @@ const CheckInOutContainer = styled.div`
   border: 1px solid rgb(221, 221, 221);
   color: #A7A7A7;
   border-radius: 8px;
+  max-height: 55px;
 `;
 
 const CheckInOutCol = styled.div`
@@ -33,6 +34,7 @@ const CheckInOutCol = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding: 10px;
+  max-height: 55px;
 `;
 
 const CheckInOutColSelected = styled.div`
@@ -45,6 +47,7 @@ const CheckInOutColSelected = styled.div`
   border: 2px solid black;
   border-radius: 8px;
   color: black;
+  max-height: 55px;
 `;
 
 // Font Info
