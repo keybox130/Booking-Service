@@ -43,6 +43,8 @@ const RightMonth = styled.div`
 const MonthTitle = styled.h3`
   font-weight: 500;
   font-size: 18px;
+  padding: 0;
+  margin: 0;
 `;
 
 class MonthSlider extends React.Component {

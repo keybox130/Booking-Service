@@ -21,6 +21,8 @@ const PriceTitle = styled.h3`
   font-weight: 500;
   font-size: 20px;
   margin-right: 5px;
+  padding: 0;
+  margin: 0;
 `;
 
 const NightText = styled.p`

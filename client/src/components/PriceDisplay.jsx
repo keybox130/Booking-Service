@@ -29,11 +29,15 @@ const PriceDesc = styled.h3`
   text-decoration: underline;
   font-weight: 400;
   font-size: 16px;
+  padding: 0;
+  margin: 0;
 `;
 
 const Price = styled.h3`
   font-size: inherit;
   font-weight: 400;
+  padding: 0;
+  margin: 0;
 `;
 
 const Warning = styled.p`
@@ -53,6 +57,8 @@ const CenterRow = styled.div`
 const TotalText = styled.h3`
   font-weight: 550;
   font-size: 16px;
+  padding: 0;
+  margin: 0;
 `;
 
 class PriceDisplay extends React.Component {

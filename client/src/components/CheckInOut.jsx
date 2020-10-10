@@ -31,12 +31,16 @@ const FlexColBorder = styled.div`
 const SmallBoldTitle = styled.h3`
   font-weight: 550;
   font-size: 10px;
+  padding: 0;
+  margin: 0;
 `;
 
 const SecondaryText = styled.input`
   border: transparent;
   color: #787878;
   background-color: transparent;
+  padding: 0;
+  margin: 0;
 `;
 
 class CheckInOut extends React.Component {

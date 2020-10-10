@@ -26,11 +26,15 @@ const Arrow = styled.img`
 const SmallBoldTitle = styled.h3`
   font-weight: bold;
   font-size: 12px;
+  padding: 0;
+  margin: 0;
 `;
 
 const SmallParaText = styled.p`
   font-weight: 400;
   font-size: 13px;
+  padding: 0;
+  margin: 0;
 `;
 
 class Guest extends React.Component {
