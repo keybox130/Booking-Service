@@ -52,6 +52,8 @@ const NightTitle = styled.h3`
   font-weight: 500;
   font-size: 22px;
   margin-bottom: 15px;
+  margin: 0;
+  padding: 0;
 `;
 
 const SecondaryText = styled.p`
@@ -63,6 +65,8 @@ const SecondaryText = styled.p`
 const SmallBoldTitle = styled.h3`
   font-weight: 500;
   font-size: 12px;
+  margin: 0;
+  padding: 0;
 `;
 
 const FormText = styled.input`

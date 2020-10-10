@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
+const seed = require('./seed.js');
 
-mongoose.connect('mongodb://localhost/bookings', { useNewUrlParser: true });
+mongoose.connect('mongodb://172.17.0.2:27017/bookings', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Connection Err'));
-db.once('open', () => console.log('We are connected'));
+db.once('open', () => seed.seed());
 
 const schema = mongoose.Schema({
   room_id: String,

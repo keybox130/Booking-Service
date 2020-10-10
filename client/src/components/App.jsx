@@ -106,7 +106,7 @@ class App extends React.Component {
 
   getRoom() {
     const self = this;
-    axios.get('/stays/3')
+    axios.get('/booking/stays/3')
       .then((res) => {
         self.setState({ roomData: res.data }, () => self.handleDateSliderMonths());
       })

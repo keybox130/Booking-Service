@@ -7,7 +7,7 @@ const app = express();
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/stays/:stayId', (req, res) => {
+app.get('/booking/stays/:stayId', (req, res) => {
   const data = req.params.stayId;
   db.getRoomData(data, (err, results) => {
     if (err) {
