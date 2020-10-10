@@ -13,9 +13,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-<React.Fragment>
-<GlobalStyle />
-  <App />
-</React.Fragment>,
-document.getElementById('app'),
+  <React.StrictMode>
+    <GlobalStyle />
+    <App />
+  </React.StrictMode>,
+  document.getElementById("calendar"),
 );
