@@ -60,5 +60,5 @@ const seed = () => {
   });
 };
 
-seed();
+// seed();
 module.exports.seed = seed;
