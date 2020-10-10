@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://172.17.0.2:27017/bookings', { useNewUrlParser: true });
+// 172.17.0.2:27017
+mongoose.connect('mongodb://localhost/bookings', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
