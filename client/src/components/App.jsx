@@ -3,36 +3,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { createGlobalStyle } from 'styled-components';
 // Components
 import InitialState from './InitialState.jsx';
 import Calendar from './Calendar.jsx';
 import GuestModal from './GuestModal.jsx';
 
-const GlobalStyle = createGlobalStyle`
-html, body {
-  font-family: 'Montserrat', sans-serif;
-  padding: 0;
-  margin: 0;
-}
-
-div, a, h1, h2, h3, h4, h5, h6, p, input, button, option, select, form {
-  font-family: inherit;
-  color: inherit;
-  padding: 0;
-  margin: 0;
-}
-img {
-  cursor: pointer;
-}
-`;
 
 const Container = styled.div`
   position: absolute;
-  position: absolute !important;
-  top: 24px !important;
-  right: 32px !important;
+  right: 3px;
+  top: 900px;
 `;
+
 
 Date.prototype.addDays = function(days) {
   var date = new Date(this.valueOf());
@@ -106,7 +88,7 @@ class App extends React.Component {
 
   getRoom() {
     const self = this;
-    axios.get('/stays/3')
+    axios.get('/booking/stays/3')
       .then((res) => {
         self.setState({ roomData: res.data }, () => self.handleDateSliderMonths());
       })

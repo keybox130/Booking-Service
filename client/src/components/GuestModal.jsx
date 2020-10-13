@@ -53,6 +53,8 @@ const CloseRow = styled.div`
 const AgeFont = styled.h3`
   font-size: 16px;
   font-weight: 500;
+  margin: 0;
+  padding: 0;
 `;
 
 const SecondaryText = styled.p`
@@ -64,6 +66,8 @@ const Close = styled.h4`
   font-wieght: 500;
   text-decoration: underline;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
 `;
 
 const WarningText = styled.p`

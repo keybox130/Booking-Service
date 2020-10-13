@@ -2,28 +2,51 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Containers
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 10px;
+// `;
+
+// const FlexCol = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: flex-start;
+//   max-height: 50px;
+//   margin: 0;
+//   padding: 0;
+// `;
+
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 14px;
+  padding: 10px;
 `;
 
 const FlexCol = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: flex-start;
+`;
+const TitleDiv = styled.div`
+  font-weight: bold;
+  font-size: 12px;
 `;
 
+const SecondaryDiv = styled.div`
+  font-weight: 400;
+  font-size: 13px;
+`;
 const Arrow = styled.img`
   margin-right: 4px;
 `;
 
 // Font Styles
 
-const SmallBoldTitle = styled.h3`
+const SmallBoldTitle = styled.p`
   font-weight: bold;
   font-size: 12px;
 `;
@@ -53,7 +76,7 @@ class Guest extends React.Component {
     const { guestCount, guestTotal, active, toggle } = this.props;
     const { open } = this.state;
     const guestCountRender = guestTotal
-      ? <FlexCol><SmallBoldTitle>GUESTS</SmallBoldTitle><SmallParaText>{guestTotal} guests</SmallParaText></FlexCol>
+      ? <FlexCol> <TitleDiv>{'GUESTS'}</TitleDiv> <div>{guestTotal} {'guests'}</div></FlexCol>
       : <h1>Loading...</h1>;
     const arrowRender = active
       ? <Arrow src="https://keybox.s3-us-west-1.amazonaws.com/upArrow.png" />

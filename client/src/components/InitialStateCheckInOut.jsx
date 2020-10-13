@@ -10,6 +10,8 @@ const Container = styled.div`
   flex-direction: column;
   border: 0.5px solid rgb(176, 176, 176);
   border-radius: 8px;
+  margin: 0;
+  padding: 0;
 `;
 
 class InitialStateCheckInOut extends React.Component {
