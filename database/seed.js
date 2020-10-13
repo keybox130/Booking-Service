@@ -24,7 +24,7 @@ const generateSeedData = () => {
     const minDays = random(1, 30);
     const serviceFee = `${random(3, 5)}.${random(1, 99)}`;
     const baseNightlyPrice = `${random(41, 556)}.${random(1, 99)}`;
-    const startingDate = new Date();
+    const startingDate = new Date(2020, 0, 1);
     const weeklyDiscount = { discount: randomBool(), percentage: random(5, 25) };
     const monthlyDiscount = { discount: randomBool(), percentage: random(5, 25) };
     const alreadyBooked = [];
@@ -49,6 +49,8 @@ const generateSeedData = () => {
   return result;
 };
 
+//  new Date(2020, monthKey, dayValue)
+
 const seed = () => {
   const arr = generateSeedData();
   db.Room.insertMany(arr, (err, docs) => {
@@ -60,5 +62,5 @@ const seed = () => {
   });
 };
 
-// seed();
+seed();
 module.exports.seed = seed;

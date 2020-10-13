@@ -85,7 +85,7 @@ const seed = () => {
 };
 
 db.on('error', console.error.bind(console, 'Connection Err'));
-db.once('open', () => seed());
+db.once('open', () => console.log('Connected')); // seed()
 
 
 

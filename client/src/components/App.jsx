@@ -11,10 +11,10 @@ import GuestModal from './GuestModal.jsx';
 
 const Container = styled.div`
   position: absolute;
-  position: absolute !important;
-  top: 24px !important;
-  right: 32px !important;
+  right: 3px;
+  top: 900px;
 `;
+
 
 Date.prototype.addDays = function(days) {
   var date = new Date(this.valueOf());

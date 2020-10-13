@@ -28,7 +28,8 @@ const UsedContainer = styled.div`
 const NormalContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 9px;
+  border: 0.5 solid transparent;
   justify-content: center;
   font-size: 14px;
   border-radius: 100px;
@@ -45,7 +46,8 @@ const NormalContainer = styled.div`
 const ChainContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 9px;
+  border: 0.5 solid transparent;
   justify-content: center;
   font-size: 14px;
   border-radius: 8px;
